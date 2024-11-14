@@ -130,6 +130,10 @@ services.flatpak.enable = true;
     wget
     virt-manager
     obs-studio
+    libreoffice-qt
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.th_TH
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
