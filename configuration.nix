@@ -114,6 +114,8 @@ services.flatpak.enable = true;
       mediawriter
       vscode
       git
+      yabridge
+      yabridgectl
 #  thunderbird
     ];
   };
