@@ -116,7 +116,6 @@ services.flatpak.enable = true;
       git
       yabridge
       yabridgectl
-      calf
 #  thunderbird
     ];
   };
@@ -137,6 +136,8 @@ services.flatpak.enable = true;
     hunspell
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
+    wineWowPackages.waylandFull
+    calf 
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
