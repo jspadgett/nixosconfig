@@ -138,6 +138,7 @@ services.flatpak.enable = true;
     hunspellDicts.th_TH
     wineWowPackages.waylandFull
     calf 
+    bottles
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
