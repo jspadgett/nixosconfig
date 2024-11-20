@@ -116,6 +116,7 @@ services.flatpak.enable = true;
       git
       yabridge
       yabridgectl
+      calf
 #  thunderbird
     ];
   };
