@@ -132,7 +132,7 @@ services.flatpak.enable = true;
     hunspell
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
-    wineWowPackages.waylandFull
+    wine-staging
     calf 
     bottles
     ardour
