@@ -137,7 +137,7 @@ services.flatpak.enable = true;
     calf 
     bottles
     ardour
-    blender
+    blender-hip
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
