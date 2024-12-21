@@ -64,7 +64,7 @@
   # Enable vm manager
     virtualisation.libvirtd.enable = true; programs.virt-manager.enable = true;
   # Enable sound with pipewire.
-  sound.enable = true; hardware.pulseaudio.enable = false; security.rtkit.enable = true; services.pipewire = {
+    hardware.pulseaudio.enable = false; security.rtkit.enable = true; services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -96,14 +96,12 @@ services.flatpak.enable = true;
       kate
       konsole
       expressvpn
-      qbittorrent
       p7zip
       vesktop
       expressvpn  
       quickemu
       darktable
       reaper
-      kdeconnect
       yt-dlp
       vlc
       handbrake
@@ -138,6 +136,7 @@ services.flatpak.enable = true;
     bottles
     ardour
     blender-hip
+    caprine
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
