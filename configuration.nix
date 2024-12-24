@@ -110,6 +110,7 @@ services.flatpak.enable = true;
       git
       yabridge
       yabridgectl
+      qbittorrent-nox
 #  thunderbird
     ];
   };
