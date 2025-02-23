@@ -43,7 +43,12 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
+ # ROCm configuration
+    boot.kernelParams = [
+    "amdgpu.ppfeaturemask=0xffffffff"
+  ];
+ # enable docker daemon
+  virtualisation.docker.enable = true; 
  # Enable the X11 windowing system.
   services.xserver.enable = true;
   # Enable the KDE Plasma Desktop Environment.
@@ -92,6 +97,7 @@ services.flatpak.enable = true;
     description = "joshua";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      brave
       firefox
       kate
       konsole
@@ -110,7 +116,7 @@ services.flatpak.enable = true;
       git
       yabridge
       yabridgectl
-      qbittorrent-nox
+      ryujinx
 #  thunderbird
     ];
   };
@@ -138,8 +144,15 @@ services.flatpak.enable = true;
     ardour
     blender-hip
     caprine
+    qbittorrent
+    kdePackages.kdeconnect-kde
+    docker
+    rocmPackages.clr
+    rocmPackages.rocm-smi
+    rocmPackages.rocminfo
+    signal-desktop
+    warp-terminal
     ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
    programs.mtr.enable = true;
