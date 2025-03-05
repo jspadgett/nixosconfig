@@ -152,6 +152,7 @@ services.flatpak.enable = true;
     rocmPackages.rocminfo
     signal-desktop
     warp-terminal
+    kicad
     ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
