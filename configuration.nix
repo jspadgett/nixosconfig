@@ -153,6 +153,9 @@ services.flatpak.enable = true;
     signal-desktop
     warp-terminal
     kicad
+    amdgpu_top
+    appimage-run
+    carla
     ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
