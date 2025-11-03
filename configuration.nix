@@ -47,13 +47,26 @@
     boot.kernelParams = [
     "amdgpu.ppfeaturemask=0xffffffff"
   ];
+ # enable nerd fonts
+ fonts.packages = [ 
+         pkgs.nerd-fonts.jetbrains-mono
+     ];
  # enable docker daemon
   virtualisation.docker.enable = true; 
- # Enable the X11 windowing system.
+  # Enable the X11 windowing system.
   services.xserver.enable = true;
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+#  services.desktopManager.plasma6.enable = true;
+  # Enable Hyprland
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
+  };
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -89,6 +102,8 @@
     device = "192.168.1.188:/mnt/slow2";
     fsType = "nfs";
   };
+# enable mullvad
+ services.mullvad-vpn.enable = true;  
 # enable Flatpak
 services.flatpak.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -99,12 +114,8 @@ services.flatpak.enable = true;
     packages = with pkgs; [
       brave
       firefox
-      kate
-      konsole
-      expressvpn
       p7zip
-      vesktop
-      expressvpn  
+      vesktop  
       quickemu
       darktable
       reaper
@@ -156,6 +167,17 @@ services.flatpak.enable = true;
     amdgpu_top
     appimage-run
     carla
+    makemkv
+    mullvad-vpn
+    spotify
+    waybar
+    dunst
+    libnotify
+    hyprpaper
+    kitty
+    wofi
+    font-awesome
+    font-awesome_5
     ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
