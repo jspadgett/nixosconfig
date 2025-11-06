@@ -5,6 +5,7 @@
     # configuration.nix. You can also use latter versions if you wish to
     # upgrade.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    catppuccin.url = "github:catppuccin/nix/release-25.05";
   };
   outputs = inputs@{ self, nixpkgs, ... }: {
     # NOTE: 'nixos' is the default hostname set by the installer

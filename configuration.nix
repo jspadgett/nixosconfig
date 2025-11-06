@@ -4,7 +4,17 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  signal-with-kwallet = pkgs.symlinkJoin {
+    name = "signal-desktop";
+    paths = [ pkgs.signal-desktop ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/signal-desktop \
+        --add-flags "--password-store=kwallet6"
+    '';
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -74,7 +84,9 @@
   };
   hardware.bluetooth.enable = true; # enables support for Bluetooth
  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  # Enable CUPS to print documents.
+ # Enable kwallet 
+  security.pam.services.sddm.enableKwallet = true;
+ # Enable CUPS to print documents.
   services.printing.enable = true;
 
   #Enable unfree packages  
@@ -141,9 +153,15 @@ services.flatpak.enable = true;
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     # Your custom Signal with kwallet6
+    signal-with-kwallet
+
+   #other packages
     htop
+    busybox
     wget
     virt-manager
+    kdePackages.kwallet-pam
     obs-studio
     libreoffice-qt
     hunspell
@@ -161,7 +179,6 @@ services.flatpak.enable = true;
     rocmPackages.clr
     rocmPackages.rocm-smi
     rocmPackages.rocminfo
-    signal-desktop
     warp-terminal
     kicad
     amdgpu_top
@@ -178,7 +195,21 @@ services.flatpak.enable = true;
     wofi
     font-awesome
     font-awesome_5
+    hyprshot
+    hyprlock
+    kdePackages.qtsvg
+    kdePackages.kio-fuse #mouts remote file systems
+    kdePackages.kio-extras
+    kdePackages.dolphin
+    hypridle
+    unzip
+    pavucontrol
+    pywal
+    imagemagick
+    wallust
+    swww
     ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
    programs.mtr.enable = true;
@@ -191,6 +222,9 @@ services.flatpak.enable = true;
       remotePlay.openFirewall = true; # Opens ports in the firewall for steam Remote play
       dedicatedServer.openFirewall = true; # Opens ports for source dedicated server
    };  
+
+
+
 # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
