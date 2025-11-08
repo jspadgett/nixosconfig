@@ -24,6 +24,7 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -208,6 +209,7 @@ services.flatpak.enable = true;
     imagemagick
     wallust
     swww
+    blueman
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
