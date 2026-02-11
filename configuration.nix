@@ -4,17 +4,17 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-  signal-with-kwallet = pkgs.symlinkJoin {
-    name = "signal-desktop";
-    paths = [ pkgs.signal-desktop ];
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/signal-desktop \
-        --add-flags "--password-store=kwallet6"
-    '';
-  };
-in
+#let
+#  signal-with-kwallet = pkgs.symlinkJoin {
+#    name = "signal-desktop";
+#    paths = [ pkgs.signal-desktop ];
+#    buildInputs = [ pkgs.makeWrapper ];
+#    postBuild = ''
+#      wrapProgram $out/bin/signal-desktop \
+#        --add-flags "--password-store=kwallet6"
+#    '';
+#  };
+#in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -27,7 +27,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixietube"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -89,6 +89,14 @@ in
   security.pam.services.sddm.enableKwallet = true;
  # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    };
+
+# enable polkit
+  security.polkit.enable = true;
 
   #Enable unfree packages  
     nixpkgs.config.allowUnfree = true;
@@ -103,7 +111,8 @@ in
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
+  
+  # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
   #  media-session.enable = true;
   };
@@ -115,6 +124,8 @@ in
     device = "192.168.1.188:/mnt/slow2";
     fsType = "nfs";
   };
+#enable mtp support for android devices 
+ services.gvfs.enable = true;
 # enable mullvad
  services.mullvad-vpn.enable = true;  
 # enable Flatpak
@@ -140,7 +151,7 @@ services.flatpak.enable = true;
       git
       yabridge
       yabridgectl
-      ryujinx
+      ryubing
 #  thunderbird
     ];
   };
@@ -155,10 +166,11 @@ services.flatpak.enable = true;
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      # Your custom Signal with kwallet6
-    signal-with-kwallet
+#    signal-with-kwallet
 
    #other packages
-    htop
+   kdePackages.ark
+    btop
     busybox
     wget
     virt-manager
@@ -171,7 +183,7 @@ services.flatpak.enable = true;
     wine-staging
     calf 
     bottles
-    ardour
+    freecad
     blender-hip
     caprine
     qbittorrent
@@ -191,7 +203,7 @@ services.flatpak.enable = true;
     waybar
     dunst
     libnotify
-    hyprpaper
+     hyprpaper
     kitty
     wofi
     font-awesome
@@ -202,6 +214,7 @@ services.flatpak.enable = true;
     kdePackages.kio-fuse #mouts remote file systems
     kdePackages.kio-extras
     kdePackages.dolphin
+    kdePackages.kio-admin
     hypridle
     unzip
     pavucontrol
@@ -210,6 +223,19 @@ services.flatpak.enable = true;
     wallust
     swww
     blueman
+    protonup-qt
+    popsicle
+    file-roller
+    corectrl
+    neofetch
+    prismlauncher
+    system-config-printer
+    libmtp
+    mtpfs
+    android-file-transfer
+    appimage-run
+    bolt-launcher
+    runelite
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -228,22 +254,35 @@ services.flatpak.enable = true;
 
 
 # List services that you want to enable:
+  # programs.corectl.enable = true
 
   # Enable the OpenSSH daemon.
    services.openssh.enable = true;
   # Enable Tailscale
    services.tailscale.enable = true;
-
+  #
+  programs.corectrl.enable = true; 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
    networking.firewall.enable = false;
-  # this should add calf synth to thepath correctly
-  
+  # add udevrule for gpu 
+  security.polkit.extraConfig = ''
+  polkit.addRule(function(action, subject) {
+    if ((action.id == "org.corectrl.helper.init" || action.id == "org.corectrl.helperkiller.init") && 
+        subject.local == true && 
+        subject.active == true && 
+        subject.isInGroup("wheel")) {
+      return polkit.Result.YES;
+    }
+  });
+'';  
+
   # This value determines the NixOS release from which the default settings for stateful data, like file locations and database versions on your system 
   # were taken. It‘s perfectly fine and recommended to leave this value at the release version of the first install of this system. Before changing this 
   # value read the documentation for this option (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
+

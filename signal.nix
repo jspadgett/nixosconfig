@@ -1,4 +1,4 @@
-nix # /etc/nixos/signal.nix
+# /etc/nixos/signal.nix
 #
 # This module handles the custom Signal Desktop wrapper
 # that forces kwallet6 as the password store.

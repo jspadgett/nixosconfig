@@ -4,12 +4,12 @@
     # NOTE: Replace "nixos-23.11" with that which is in system.stateVersion of
     # configuration.nix. You can also use latter versions if you wish to
     # upgrade.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    catppuccin.url = "github:catppuccin/nix/release-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
   };
   outputs = inputs@{ self, nixpkgs, ... }: {
     # NOTE: 'nixos' is the default hostname set by the installer
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixietube = nixpkgs.lib.nixosSystem {
       # NOTE: Change this to aarch64-linux if you are on ARM
       system = "x86_64-linux";
       modules = [ 
@@ -19,6 +19,8 @@
             settings.experimental-features = [ "nix-command" "flakes" ];
           }; 
          }
+       #add more modules
+       ./signal.nix
        ];
     };
   };
