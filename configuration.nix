@@ -170,7 +170,7 @@ services.flatpak.enable = true;
 
    #other packages
    kdePackages.ark
-    btop
+    btop-rocm
     busybox
     wget
     virt-manager
@@ -193,7 +193,6 @@ services.flatpak.enable = true;
     rocmPackages.rocm-smi
     rocmPackages.rocminfo
     warp-terminal
-    kicad
     amdgpu_top
     appimage-run
     carla
@@ -236,6 +235,12 @@ services.flatpak.enable = true;
     appimage-run
     bolt-launcher
     runelite
+    radeontop
+    lm_sensors
+    stress-ng
+    s-tui
+    libation
+    jellyfin-desktop
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
