@@ -1,0 +1,127 @@
+# ===========================
+# DUNST CONFIG FOR HYPRLAND
+# ===========================
+# Location: ~/.config/dunst/dunstrc
+# Notes:
+# - Dunst is a lightweight notification daemon.
+# - Hyprland uses Wayland, so Dunst should be started *after* Hyprland launches.
+# - Make sure you have `dunst` enabled via home-manager or your NixOS config.
+
+[global]
+    ### Appearance ###
+    font = JetBrains Mono 10
+    # Possible fallback: font = Sans 10
+
+    # Notification geometry and position:
+    # format: WIDTHxHEIGHT+X+Y
+    # or just set position like: top-right, bottom-left, etc.
+    geometry = "300x50-30+30"
+    origin = top-right
+
+    # Transparency (0 = opaque, 100 = fully transparent)
+    transparency = 5
+
+    # Padding between text/icon and border
+    padding = 10
+    horizontal_padding = 10
+    text_icon_padding = 8
+
+    # Frame and border
+    frame_width = 2
+    frame_color = "#88C0D0"  # Nord-style accent color
+
+    # Rounded corners (requires dunst >= 1.10)
+    corner_radius = 8
+
+    # Background and foreground colors
+    background = "#2E3440"
+    foreground = "#ECEFF4"
+
+    # Separator between stacked notifications
+    separator_height = 2
+    separator_color = auto
+
+    # Icon theme (make sure matching icon theme is installed)
+    icon_theme = "Papirus-Dark"
+
+    # Scaling icons to fit
+    max_icon_size = 64
+
+    # Enable markup for bold/italic and clickable links
+    markup = full
+
+    ### Timing ###
+    # Display time in milliseconds
+    timeout = 5000
+
+    # Shorter timeout for low urgency
+    # and longer for critical
+    low_timeout = 3000
+    normal_timeout = 5000
+    critical_timeout = 0   # 0 = persistent until dismissed
+
+    ### Behavior ###
+    # Stack notifications or show all
+    stack_duplicates = true
+    hide_duplicate_count = false
+
+    # Ignore new notifications while one is visible
+    indicate_hidden = yes
+
+    ### Mouse actions ###
+    # left click = close notification
+    # middle click = close all
+    # right click = open URL/action
+    mouse_left_click = close_current
+    mouse_middle_click = close_all
+    mouse_right_click = do_action
+
+    ### Monitor selection ###
+    # If you have multiple monitors, you can specify where to show notifications:
+    # monitor = 0
+    # monitor = "HDMI-A-1"
+    follow = mouse
+    # Options: mouse, keyboard, none
+
+    ### Wayland ###
+    # Required for Wayland compositors like Hyprland
+    wayland = true
+
+    # Dunst can scale with Hyprland’s scaling factors
+    scale = 0
+
+    ### Logging ###
+    # Write notifications to a log file for debugging
+     path = ~/.cache/dunst.log
+     verbosity = mesg
+
+[urgency_low]
+    background = "#3B4252"
+    foreground = "#D8DEE9"
+    frame_color = "#81A1C1"
+    timeout = 3000
+
+[urgency_normal]
+    background = "#2E3440"
+    foreground = "#ECEFF4"
+    frame_color = "#88C0D0"
+    timeout = 5000
+
+[urgency_critical]
+    background = "#BF616A"
+    foreground = "#ECEFF4"
+    frame_color = "#BF616A"
+    timeout = 0  # persistent
+
+# ===========================
+# Keybindings / Extras
+# ===========================
+# Useful commands:
+#   dunstctl close        → close latest notification
+#   dunstctl close-all    → close all
+#   dunstctl history-pop  → redisplay last notification
+
+# You can bind these in your Hyprland config, e.g.:
+#   bind = SUPER, N, exec, dunstctl history-pop
+#   bind = SUPER, M, exec, dunstctl close-all
+

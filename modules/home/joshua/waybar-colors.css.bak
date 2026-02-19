@@ -1,0 +1,10 @@
+@define-color background #1E1C1A;
+@define-color foreground #FEFDA6;
+@define-color color0 #454340;
+@define-color color1 #444D9E;
+@define-color color2 #0150E3;
+@define-color color3 #102CD0;
+@define-color color4 #7C79CB;
+@define-color color5 #65A6FE;
+@define-color color6 #0004FD;
+@define-color color7 #F6F477;
