@@ -51,7 +51,7 @@
           home-manager.users.joshua = import ../modules/home/joshua/default.nix;
         }
       ];
-    }:
+    };
         # ── Athena (Laptop) ───────────────────────────────────────────
     athena = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
