@@ -1,7 +1,5 @@
 # modules/home/default.nix
 { pkgs, ... }: {
-  # modules/home/anna/default.nix
-{ pkgs, ... }: {
   home.username = "anna";
   home.homeDirectory = "/home/anna";
   home.stateVersion = "25.05";
