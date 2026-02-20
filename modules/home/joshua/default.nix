@@ -16,7 +16,9 @@
     #Browsers 
     firefox
     brave
-    
+    #Themeing
+    wallust
+    imagemagick
     #development
     vscode  
     git
