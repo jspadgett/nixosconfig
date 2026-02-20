@@ -74,7 +74,7 @@
         ../modules/desktop/nerdfonts.nix
 
         # ── Hardware ────────────────────────────────────────────
-        ../modules/hardware/intel7-gpu.nix
+        ../modules/features/intel7-gpu.nix
 
         # ── Features ────────────────────────────────────────────
         ../modules/features/flatpak.nix
