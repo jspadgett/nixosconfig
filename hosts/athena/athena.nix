@@ -30,6 +30,11 @@
         ../../modules/features/mtr.nix
         ../../modules/features/signal.nix
 
+        #--Agenix
+        inputs.agenix.nixosModules.default
+
+
+
         # ── Home Manager ────────────────────────────────────────
         inputs.home-manager.nixosModules.home-manager
         {

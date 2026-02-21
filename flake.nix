@@ -10,8 +10,13 @@
     };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+  
+   
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ ./flake/hosts.nix ];

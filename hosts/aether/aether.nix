@@ -41,7 +41,8 @@
        ../../modules/desktop/kwallet.nix
        ../../modules/desktop/desktop-packages.nix
        ../../modules/desktop/nerdfonts.nix
-
+       
+       inputs.agenix.nixosModules.default
        inputs.home-manager.nixosModules.home-manager
        {
          home-manager.useGlobalPkgs = true;
