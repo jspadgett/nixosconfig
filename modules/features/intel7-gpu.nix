@@ -1,4 +1,4 @@
-# modules/hardware/intel7-gpu.nix
+# modules/features/intel7-gpu.nix
 { pkgs, ... }: {
   services.xserver.videoDrivers = [ "modesetting" ];
 
@@ -7,7 +7,6 @@
     extraPackages = with pkgs; [
       intel-media-driver   # VA-API (Broadwell and newer)
       intel-vaapi-driver   # better for Firefox/Chromium
-      intel-media-sdk      # Quick Sync Video for Kaby Lake
     ];
   };
 
