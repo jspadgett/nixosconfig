@@ -6,6 +6,7 @@
         
        #--- Core modules
        ../../modules/common/base.nix
+       ../../modules/common/joshua-sshkeys.nix
        ./configuration.nix
         
        #--- Networking 
@@ -27,7 +28,9 @@
        ../../modules/features/gvfs.nix
        ../../modules/features/gpgagent.nix
        ../../modules/features/mtr.nix
-        #GPUSUPPORT
+       ../../modules/features/joshua-password.nix 
+
+       #GPUSUPPORT
        ../../modules/features/amdgpu.nix
         
        #--NAS Mounts

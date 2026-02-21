@@ -6,6 +6,7 @@
 
         # ── Core ────────────────────────────────────────────────
         ../../modules/common/base.nix
+        ../../modules/common/joshua-sshkeys.nix
         ./configuration.nix
 
         # ── Network ─────────────────────────────────────────────
@@ -29,7 +30,8 @@
         ../../modules/features/gpgagent.nix
         ../../modules/features/mtr.nix
         ../../modules/features/signal.nix
-
+        ../../modules/features/anna-password.nix
+        ../../modules/features/joshua-password.nix
         #--Agenix
         inputs.agenix.nixosModules.default
 
