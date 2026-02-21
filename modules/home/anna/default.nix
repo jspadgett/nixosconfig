@@ -11,13 +11,9 @@
     # Media
     vlc
     spotify
-    kdePackages.kdenlive
 
     # Photo editing
     darktable
-
-    # Communication
-    signal-desktop
 
     # Utilities
     wget

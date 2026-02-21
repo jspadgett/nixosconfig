@@ -14,7 +14,6 @@
   home.stateVersion = "25.11";
   home.packages = with pkgs; [
     #Browsers 
-    firefox
     brave
     #Themeing
     wallust

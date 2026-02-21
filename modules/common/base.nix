@@ -24,4 +24,6 @@
   nixpkgs.config.allowUnfree = true;
 # enable polkit
   security.polkit.enable = true;
+#Enable firefox
+   programs.firefox.enable = true;
 }
