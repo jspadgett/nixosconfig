@@ -22,6 +22,7 @@
 
 
        #-- features        
+       ../../modules/features/joshua-ssh-private-key.nix
        ../../modules/features/signal.nix
        ../../modules/features/kdeconnect.nix
        ../../modules/features/appimage.nix

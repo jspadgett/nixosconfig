@@ -26,6 +26,7 @@
         ../../modules/features/intel7-gpu.nix
 
         # ── Features ────────────────────────────────────────────
+        ../../modules/features/joshua-ssh-private-key.nix
         ../../modules/features/flatpak.nix
         ../../modules/features/gvfs.nix
         ../../modules/features/gpgagent.nix

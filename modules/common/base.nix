@@ -1,5 +1,5 @@
 #/modules/common/base.nix
-{ pkgs, ... }: 
+{ pkgs, inputs, ... }: 
 {
 #boot latest kernal 
 boot.kernelPackages = pkgs.linuxPackages_latest;

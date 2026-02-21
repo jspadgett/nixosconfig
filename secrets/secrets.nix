@@ -6,4 +6,5 @@ let
 in {
   "joshua-password.age".publicKeys = [ aether athena joshua ];
   "anna-password.age".publicKeys = [ athena joshua ];
+  "joshua-ssh-key.age".publicKeys = [ aether athena joshua ];
 }
