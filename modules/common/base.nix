@@ -1,5 +1,5 @@
 #/modules/common/base.nix
-{ pkgs ... }: 
+{ pkgs, ... }: 
 {
 #boot latest kernal 
 boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -28,4 +28,9 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
   security.polkit.enable = true;
 #Enable firefox
    programs.firefox.enable = true;
+# Enable agenix
+   environment.systemPackages = [
+    inputs.agenix.packages.${pkgs.system}.default
+  ];
 }
+
