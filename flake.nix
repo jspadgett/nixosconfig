@@ -16,10 +16,6 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
- 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-    };
   };
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
