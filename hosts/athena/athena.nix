@@ -16,7 +16,7 @@
         ../../modules/features/ssh.nix
 
         # ── Desktop ─────────────────────────────────────────────
-        ../../modules/desktop/cosmic.nix
+        ../../modules/desktop/cosmic-latest.nix
         ../../modules/desktop/audio.nix
         ../../modules/desktop/bluetooth.nix
         ../../modules/desktop/printing.nix

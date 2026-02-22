@@ -31,6 +31,8 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
 # Enable agenix
    environment.systemPackages = [
     inputs.agenix.packages.${pkgs.system}.default
-  ];
+    ffmpeg-headless # video decoding for thumbnails
+    ffmpegthumbnailer  
+ ];
 }
 
