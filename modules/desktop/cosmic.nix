@@ -1,4 +1,4 @@
-# modules/desktop/bluetooth.nix
+# modules/desktop/cosmic.nix
 { pkgs,  ... }: {
    services.xserver.enable = true;
    services.displayManager.cosmic-greeter.enable = true;
