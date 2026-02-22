@@ -34,5 +34,10 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
     pkgs.ffmpeg-headless # video decoding for thumbnails
     pkgs.ffmpegthumbnailer  
  ];
-}
+
+   environment.pathsToLink = [
+     "/share/applications"
+     "/share/xdg-desktop-portal"
+   ];
+  }
 
