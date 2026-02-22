@@ -1,5 +1,5 @@
 # /modules/features/flatpak.nix
-{ ... }: {
+{ pkgs, ... }: {
 
 #
 #Enables FlatPak 
