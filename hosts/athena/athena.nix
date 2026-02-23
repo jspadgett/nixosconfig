@@ -34,7 +34,8 @@
         ../../modules/features/signal.nix
         ../../modules/features/anna-password.nix
         ../../modules/features/joshua-password.nix
-        #--Agenix
+        ../../modules/features/tlp.nix
+         #--Agenix
         inputs.agenix.nixosModules.default
 
 
