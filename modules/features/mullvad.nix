@@ -1,7 +1,9 @@
-# /modules/features/tailscale.nix
-{ ... }: {
+# /modules/features/mullvad.nix
+{ pkgs, ... }: {
 
 #
 #Enables Mullvad VPN 
    services.mullvad-vpn.enable = true;
-   }
+   services.mullvad-vpn.package = pkgs.mullvad-vpn;
+   environment.systemPackages = [ pkgs.mullvad-vpn ];  
+ }
