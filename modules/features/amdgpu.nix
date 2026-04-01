@@ -28,5 +28,8 @@
     clinfo              # verify OpenCL is working
     lact                # GPU control GUI
     blender-hip         # blender with AMD accel
+    libva
+    libva-utils
+    mesa
   ];
 }
