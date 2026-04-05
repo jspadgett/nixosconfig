@@ -26,7 +26,7 @@ networking.hostName = "aether"; # Define your hostname.
   users.users.joshua = {
     isNormalUser = true;
     description = "joshua";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" " docker" "video" "render" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "docker" "video" "render" ];
 
   };
 
