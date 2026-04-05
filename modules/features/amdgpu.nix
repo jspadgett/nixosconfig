@@ -7,7 +7,7 @@
   # Enable graphics and 32bit support (needed for Wine/Steam)
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfffd7fff" ];
   # OpenCL support via ROCm
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr.icd
