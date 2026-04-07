@@ -19,5 +19,7 @@
     p7zip
     lm_sensors
     mkvtoolnix
+    ffmpeg
+    tmux
     ];
 }
