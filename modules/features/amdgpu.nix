@@ -15,7 +15,6 @@
 
   # LACT — AMD GPU control daemon (fan curves, power limits, overclocking)
   # Replaces corectrl with a cleaner NixOS native service
-  services.lact.enable = true;
 
   # AMD GPU tools and ROCm packages
   environment.systemPackages = with pkgs; [
@@ -26,7 +25,6 @@
     amdgpu_top
     radeontop
     clinfo              # verify OpenCL is working
-    lact                # GPU control GUI
     blender-hip         # blender with AMD accel
     libva
     libva-utils

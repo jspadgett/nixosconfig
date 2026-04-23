@@ -13,6 +13,8 @@
   boot.extraModprobeConfig = ''
     options snd_hda_intel power_save=0
   '';
-
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0499", ATTR{idProduct}=="1704", ATTR{power/autosuspend}="-1"
+  '';
 }
 
