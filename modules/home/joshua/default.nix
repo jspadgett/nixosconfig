@@ -1,5 +1,6 @@
 # modules/home/joshua/default.nix
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./kitty.nix  
     ./dunst.nix
@@ -47,7 +48,7 @@
   home.file = {
     ".config/hypr/scripts".source = ./scripts;
     ".config/hypr/wallpapers".source = ./wallpapers;
-};
+ };
 }
 
 
