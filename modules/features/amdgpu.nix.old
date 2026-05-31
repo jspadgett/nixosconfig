@@ -1,27 +1,13 @@
-# /modules/features/amdgpu.nix
-{ pkgs, inputs, ... }:
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-in {
+#/modules/features/amdgpu.nix
+{ pkgs, ... }: {
 #
-#   AMD GPU tools and configs for 9070xt
+#
+#   AMD GPU tools ands and configs for 9070xt
 #   AMD GPU tools and ROCm compute packages
-
   # Enable graphics and 32bit support (needed for Wine/Steam)
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
-
-  # ── Mesa version ──────────────────────────────────────────────
-  # NixOS 25.05 decoupled Mesa drivers from the package set, so
-  # swapping the version here won't trigger mass rebuilds. Track
-  # unstable for the latest RADV improvements on RDNA 4 (gfx1201).
-  hardware.graphics.package = unstable.mesa;
-
   boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfffd7fff" ];
-
   # OpenCL support via ROCm
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr.icd
@@ -38,9 +24,10 @@ in {
     btop-rocm
     amdgpu_top
     radeontop
-    clinfo
-    blender-hip
+    clinfo              # verify OpenCL is working
+    blender-hip         # blender with AMD accel
     libva
     libva-utils
+    mesa
   ];
 }

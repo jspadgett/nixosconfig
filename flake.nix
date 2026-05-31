@@ -2,6 +2,9 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    
     catppuccin.url = "github:catppuccin/nix/release-25.11";
 
     home-manager = {
@@ -11,12 +14,12 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
   
-   
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+  
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ ./flake/hosts.nix ];
