@@ -37,7 +37,7 @@
         
        #--NAS Mounts
        ../../modules/nas/slow2-nfs.nix
-
+       ../../modules/nas/darktable-nfs.nix
        #--Desktop Features
        ../../modules/desktop/bluetooth.nix
        ../../modules/desktop/printing.nix
