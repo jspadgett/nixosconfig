@@ -21,6 +21,5 @@
     mkvtoolnix
     ffmpeg
     tmux
-    kdenlive
     ];
 }
