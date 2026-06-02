@@ -16,5 +16,9 @@
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0499", ATTR{idProduct}=="1704", ATTR{power/autosuspend}="-1"
   '';
+  environment.systemPackages = [
+    pkgs.qjackctl
+  ];
+
 }
 

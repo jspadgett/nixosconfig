@@ -94,7 +94,7 @@
       };
 
       master = {
-        new_status = "master";
+        new_status = "slave";
         mfact = 0.50;
         orientation = "center";
       };
