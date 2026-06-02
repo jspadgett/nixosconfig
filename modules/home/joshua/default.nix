@@ -30,7 +30,6 @@
     handbrake
     mediawriter
     reaper
-    darktable
     obs-studio
     makemkv
     libation

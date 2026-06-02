@@ -14,20 +14,4 @@
       "nfsvers=4"                  # use NFSv4
     ];
   };
-
-  fileSystems."/mnt/darktable/db" = {
-    device  = "192.168.1.188:/mnt/fast/darktable/db";
-    fsType  = "nfs";
-    options = [
-      "x-systemd.automount"
-      "x-systemd.idle-timeout=600"
-      "noauto"
-      "_netdev"
-      "hard"
-      "sync"                       # critical — SQLite needs real fsync
-      "timeo=600"
-      "retrans=5"
-      "nfsvers=4"
-    ];
-  };
 }

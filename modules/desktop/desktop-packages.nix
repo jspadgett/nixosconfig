@@ -21,5 +21,18 @@
     mkvtoolnix
     ffmpeg
     tmux
-    ];
+
+    (writeShellScriptBin "darktable" ''
+      exec ${pkgs.darktable}/bin/darktable --configdir /mnt/darktable/config "$@"
+    '')
+
+    (pkgs.makeDesktopItem {
+      name = "darktable";
+      desktopName = "Darktable";
+      exec = "darktable %F";
+      icon = "darktable";
+      categories = [ "Graphics" "Photography" ];
+      comment = "Virtual lighttable and darkroom for photographers";
+    })
+  ];
 }
