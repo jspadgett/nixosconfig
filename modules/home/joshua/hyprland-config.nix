@@ -5,7 +5,7 @@
 
     settings = {
       workspace = [
-        "3, layoutopt:orientation:center, layoutopt:mfact:0.50"
+        "3, layout:master,  layoutopt:orientation:center, layoutopt:mfact:0.50"
       ];
       monitor = [
         ",preferred,auto,auto"
