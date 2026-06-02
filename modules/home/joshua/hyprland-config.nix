@@ -4,6 +4,9 @@
     enable = true;
 
     settings = {
+      workspace = [
+        "3, layoutopt:orientation:center, layoutopt:mfact:0.50"
+      ];
       monitor = [
         ",preferred,auto,auto"
         "DP-4,preferred,auto,auto"
@@ -92,6 +95,8 @@
 
       master = {
         new_status = "master";
+        mfact = 0.50;
+        orientation = "center";
       };
 
       misc = {
@@ -149,6 +154,10 @@
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+        "$mainMod, Plus, layoutmsg, addmaster"
+        "$mainMod, Minus, layoutmsg, removemaster"
+        "$mainMod SHIFT, M, layoutmsg, swapwithmaster"     
+        "$mainMod CTRL, C, exec, hyprctl dispatch workspace 3 && sleep 0.2 && firefox & sleep 0.5 && vesktop & sleep 0.3 && signal-desktop &"     
       ];
 
       bindel = [
@@ -210,6 +219,9 @@
         "pseudo, title:^(.*quickemu.*)$"
         "size 1920 1080, title:^(.*quickemu.*)$"
         "center, title:^(.*quickemu.*)$"
+        "workspace 3 silent, class:^(firefox)$"
+        "workspace 3 silent, class:^(vesktop)$"
+        "workspace 3 silent, class:^(signal)$"
       ];
     };
   };
