@@ -19,6 +19,8 @@
        #-- Virtualization
        ../../modules/features/virtualisation.nix
        ../../modules/features/steam.nix
+
+
        #-- features        
        ../../modules/features/joshua-ssh-private-key.nix
        ../../modules/features/signal.nix
@@ -29,6 +31,7 @@
        ../../modules/features/gpgagent.nix
        ../../modules/features/mtr.nix
        ../../modules/features/joshua-password.nix 
+
        #GPUSUPPORT
        ../../modules/features/amdgpu.nix
         
@@ -43,7 +46,7 @@
        ../../modules/desktop/kwallet.nix
        ../../modules/desktop/desktop-packages.nix
        ../../modules/desktop/nerdfonts.nix
-       ../../modules/desktop/lightroom.nix
+       
        inputs.agenix.nixosModules.default
        inputs.home-manager.nixosModules.home-manager
        {
@@ -52,17 +55,6 @@
          home-manager.extraSpecialArgs = { inherit inputs; }; 
          home-manager.users.joshua = import ../../modules/home/joshua/default.nix;
         }
-
-       # Wine from unstable — stable 25.11 ships 10.20, Lightroom needs >= 11.8
-       {
-         nixpkgs.overlays = [
-           (final: prev: {
-             wineWowPackages = prev.wineWowPackages // {
-               staging = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.wineWowPackages.staging;
-             };
-           })
-         ];
-       }
      ];
    };
   }

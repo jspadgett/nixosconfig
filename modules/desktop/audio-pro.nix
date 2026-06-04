@@ -1,4 +1,4 @@
-{ ... }: {
+{pkgs,  ... }: {
   imports = [ ./audio.nix ];
 
   # low latency config for pro audio interface
@@ -18,6 +18,7 @@
   '';
   environment.systemPackages = [
     pkgs.qjackctl
+    pkgs.jack-example-tools  
   ];
 
 }

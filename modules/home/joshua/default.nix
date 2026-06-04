@@ -25,7 +25,7 @@
     quickemu
     freecad
     bottles
-    wine-staging
+    wineWowPackages.staging
     #media
     handbrake
     mediawriter
