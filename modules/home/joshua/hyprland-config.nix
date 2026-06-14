@@ -36,7 +36,7 @@
         "col.active_border" = "rgb(F2FAF7) rgb(CB5364) 45deg";
         "col.inactive_border" = "rgb(000006)";
         resize_on_border = false;
-        allow_tearing = false;
+        allow_tearing = true;
         layout = "dwindle";
       };
 
@@ -157,6 +157,7 @@
         "$mainMod, Plus, layoutmsg, addmaster"
         "$mainMod, Minus, layoutmsg, removemaster"
         "$mainMod SHIFT, M, layoutmsg, swapwithmaster"     
+        "$mainMod, F11, fullscreen, 0"
         "$mainMod CTRL, C, exec, hyprctl dispatch workspace 3 && sleep 0.2 && firefox & sleep 0.5 && vesktop & sleep 0.3 && signal-desktop &"     
       ];
 
@@ -222,7 +223,16 @@
         "workspace 3 silent, class:^(firefox)$"
         "workspace 3 silent, class:^(vesktop)$"
         "workspace 3 silent, class:^(signal)$"
-      ];
+        "workspace 6, class:^(lightroom\\.exe)$"
+        "float, class:^(lightroom\\.exe)$"
+        "size 80% 80%, class:^(lightroom\\.exe)$"
+        "center, class:^(lightroom\\.exe)$"
+        "fullscreen, class:(forzahorizon6.exe)"
+        "immediate, class:(forzahorizon6.exe)"
+        "workspace 4 silent, class:(forzahorizon6.exe)"
+        "opaque, class:(forzahorizon6.exe)"
+        "noblur, class:(forzahorizon6.exe)"
+       ];
     };
   };
 }
