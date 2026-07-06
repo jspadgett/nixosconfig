@@ -1,8 +1,9 @@
 # modules/desktop/cosmic.nix
-{ pkgs,  ... }: {
-   services.xserver.enable = true;
-   services.displayManager.cosmic-greeter.enable = true;
-   services.desktopManager.cosmic.enable = true;
-   services.system76-scheduler.enable = true;  
-  }
-
+{ ... }: {
+  services.displayManager.cosmic-greeter.enable = true;
+  services.desktopManager.cosmic = {
+    enable = true;
+    xwayland.enable = true;   # X11 app support (replaces services.xserver.enable)
+  };
+  services.system76-scheduler.enable = true;
+}

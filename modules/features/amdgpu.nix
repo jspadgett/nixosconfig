@@ -5,32 +5,33 @@ let
     system = "x86_64-linux";
     config.allowUnfree = true;
   };
-in {
-#
-#   AMD GPU tools and configs for 9070xt
-#   AMD GPU tools and ROCm compute packages
+in
+{
+  # AMD GPU — 9070 XT (RDNA4 / gfx1201)
 
-  # Enable graphics and 32bit support (needed for Wine/Steam)
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
+  # Enable graphics and 32-bit support (Wine/Steam/Proton)
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    # Track unstable Mesa for latest RADV on RDNA4.
+    # Both 64-bit and 32-bit must match to avoid Proton mismatches.
+    package = unstable.mesa;
+    package32 = unstable.pkgsi686Linux.mesa;
+    # OpenCL via ROCm
+    extraPackages = [ unstable.rocmPackages.clr.icd ];
+  };
 
-  # ── Mesa version ──────────────────────────────────────────────
-  # NixOS 25.05 decoupled Mesa drivers from the package set, so
-  # swapping the version here won't trigger mass rebuilds. Track
-  # unstable for the latest RADV improvements on RDNA 4 (gfx1201).
-  hardware.graphics.package = unstable.mesa;
+  # Unlock full sysfs power management + overdrive bit.
+  # Module default ppfeaturemask is 0xfffd7fff (overdrive on, GFXOFF +
+  # stutter-mode off) — identical to the old manual kernelParam, so the
+  # anti-stutter GFXOFF-disable is preserved. This is the mask LACT expects.
+  hardware.amdgpu.overdrive.enable = true;
 
-  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xfffd7fff" ];
+  # LACT re-introduced for undervolt + memory OC. Runs lactd via systemd;
+  # GUI is `lact gui`. NOTE: previously pulled due to the apply_settings_timer
+  # display feedback loop — raise that timer in /etc/lact/config.yaml.
+  services.lact.enable = true;
 
-  # OpenCL support via ROCm
-  hardware.graphics.extraPackages = with pkgs; [
-    rocmPackages.clr.icd
-  ];
-
-  # LACT — AMD GPU control daemon (fan curves, power limits, overclocking)
-  # Replaces corectrl with a cleaner NixOS native service
-
-  # AMD GPU tools and ROCm packages
   environment.systemPackages = with pkgs; [
     rocmPackages.clr
     rocmPackages.rocm-smi
@@ -40,7 +41,7 @@ in {
     radeontop
     clinfo
     blender-hip
-    libva
     libva-utils
+    # vainfo diagnostic; libva itself ships via Mesa
   ];
 }

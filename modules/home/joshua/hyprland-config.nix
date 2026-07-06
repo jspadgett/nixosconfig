@@ -219,15 +219,9 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
         "workspace 3 silent, class:^(firefox)$"
         "workspace 3 silent, class:^(vesktop)$"
         "workspace 3 silent, class:^(signal)$"
-    # Adobe Lightroom (Wine) — class lightroom.exe
+    # Adobe 
         "workspace 6 silent, class:^(lightroom\\.exe)$"
-        "float, class:^(lightroom\\.exe)$"
-    # main window only (title is exactly "Lightroom")
-        "size 80% 80%, class:^(lightroom\\.exe)$, title:^(Lightroom)$"
-        "center, class:^(lightroom\\.exe)$, title:^(Lightroom)$"
-# dialogs (PreferencesDialog, ExportDialog, …)
-        "center, class:^(lightroom\\.exe)$, floating:1"
-        "noblur, class:^(lightroom\\.exe)$"
+         "noblur, class:^(lightroom\\.exe)$"
         "idleinhibit focus, class:^(lightroom\\.exe)$"
         "fullscreen, class:(forzahorizon6.exe)"
         "immediate, class:(forzahorizon6.exe)"

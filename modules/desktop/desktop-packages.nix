@@ -1,10 +1,9 @@
 #/modules/desktop/desktop-packages.nix
 { pkgs, ... }: {
 #
-# General packages for all systems 
+# General packages for all systems
   environment.systemPackages = with pkgs; [
     jellyfin-desktop
-    busybox
     wget
     unzip
     libreoffice-qt
@@ -14,25 +13,22 @@
     file-roller
     vlc
     yt-dlp
-    neofetch
+    fastfetch
     popsicle
     p7zip
     lm_sensors
     mkvtoolnix
     ffmpeg
+    ffmpegthumbnailer          # video thumbnails for GTK file managers (Hyprland)
     tmux
-
-    (writeShellScriptBin "darktable" ''
-      exec ${pkgs.darktable}/bin/darktable --configdir /mnt/darktable/config "$@"
-    '')
-
-    (pkgs.makeDesktopItem {
-      name = "darktable";
-      desktopName = "Darktable";
-      exec = "darktable %F";
-      icon = "darktable";
-      categories = [ "Graphics" "Photography" ];
-      comment = "Virtual lighttable and darkroom for photographers";
+    (symlinkJoin {
+      name = "darktable-nfs";
+      paths = [ darktable ];
+      nativeBuildInputs = [ makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/darktable \
+          --add-flags "--configdir /mnt/darktable/config"
+      '';
     })
   ];
 }

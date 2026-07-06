@@ -14,10 +14,10 @@
     options snd_hda_intel power_save=0
   '';
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0499", ATTR{idProduct}=="1704", ATTR{power/autosuspend}="-1"
-  '';
+  ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0499", ATTR{idProduct}=="1704", ATTR{power/control}="on"
+'';
   environment.systemPackages = [
-    pkgs.qjackctl
+    pkgs.qpwgraph
     pkgs.jack-example-tools  
   ];
 

@@ -1,48 +1,22 @@
-#/modules/desktop/hyprland.nix
+# modules/desktop/hyprland.nix — safe to import ALONGSIDE plasma.nix
 { pkgs, ... }: {
-#
-#
-# installs hyprland and hyprland programs
-# Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.enable = true;
-# Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.variant = "";
-# Enable Hyprland
   programs.hyprland = {
-    enable = true;
-    withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
+    enable = true;          # also enables xdg.portal + adds the version-synced hyprland portal
+    withUWSM = true;
+    xwayland.enable = true;
   };
-   environment.systemPackages = with pkgs; [
-    waybar
-    dunst
-    hyprpaper
-    libnotify
-    wofi
-    hyprshot
-    hyprlock
-    swww
-    wallust
-    hypridle
-    kitty
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
-    kdePackages.qtsvg
-    pavucontrol
-    pywal
-    ];
- # XDG portals — critical for screenshare, file picker
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ 
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-  ];
-    config.hyprland.default = [ "hyprland" "gtk" ];
-  };
- }
 
+  environment.systemPackages = with pkgs; [
+    waybar dunst hyprpaper libnotify wofi hyprshot
+    hyprlock wallust hypridle
+    # hyprpaper (static) and swww (animated) are both wallpaper daemons — pick ONE
+    # and drop the other; only whichever you exec-once actually runs.
+    # hyprpolkitagent   # add + exec-once if you hit GUI privilege prompts outside the Plasma session
+  ];
+
+  # programs.hyprland already sets xdg.portal.enable and adds the hyprland portal
+  # (synced to your Hyprland package). We only add GTK, for the file picker XDPH lacks.
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.hyprland.default = [ "hyprland" "gtk" ];
+  # xdg.portal.config.common.default = [ "gtk" ];  # optional catch-all fallback
+}

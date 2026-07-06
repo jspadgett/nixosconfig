@@ -22,7 +22,7 @@
        #-- features        
        ../../modules/features/joshua-ssh-private-key.nix
        ../../modules/features/signal.nix
-       ../../modules/features/kdeconnect.nix
+      # ../../modules/features/kdeconnect.nix
        ../../modules/features/appimage.nix
        ../../modules/features/flatpak.nix
        ../../modules/features/gvfs.nix
@@ -40,10 +40,13 @@
        ../../modules/desktop/printing.nix
        ../../modules/desktop/audio-pro.nix        
        ../../modules/desktop/plasma.nix
+       ../../modules/desktop/hyprland.nix
       # ../../modules/desktop/kwallet.nix
        ../../modules/desktop/desktop-packages.nix
        ../../modules/desktop/nerdfonts.nix
-       ../../modules/desktop/lightroom.nix
+      # ../../modules/desktop/lightroom.nix
+       ../../modules/desktop/scheduler.nix
+       ../../modules/desktop/sunshine.nix
        inputs.agenix.nixosModules.default
        inputs.home-manager.nixosModules.home-manager
        {

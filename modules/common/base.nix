@@ -1,7 +1,7 @@
 #/modules/common/base.nix
-{ pkgs, inputs, ... }: 
+{ pkgs, inputs, ... }:
 {
-#boot latest kernal 
+#boot latest kernel
 boot.kernelPackages = pkgs.linuxPackages_latest;
 #Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -9,7 +9,6 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
   time.timeZone = "America/New_York";
 # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -21,8 +20,7 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-#Enable unfree packages  
+#Enable unfree packages
   nixpkgs.config.allowUnfree = true;
 # enable polkit
   security.polkit.enable = true;
@@ -31,13 +29,9 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
 # Enable agenix
    environment.systemPackages = [
     inputs.agenix.packages.${pkgs.system}.default
-    pkgs.ffmpeg-headless # video decoding for thumbnails
-    pkgs.ffmpegthumbnailer  
  ];
-
    environment.pathsToLink = [
      "/share/applications"
      "/share/xdg-desktop-portal"
    ];
   }
-
