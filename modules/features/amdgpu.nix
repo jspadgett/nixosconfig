@@ -40,7 +40,7 @@ in
     amdgpu_top
     radeontop
     clinfo
-    blender-hip
+    pkgs.blender
     libva-utils
     # vainfo diagnostic; libva itself ships via Mesa
   ];
