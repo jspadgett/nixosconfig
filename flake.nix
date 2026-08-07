@@ -12,6 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    
     flake-parts.url = "github:hercules-ci/flake-parts";
   
     agenix = {

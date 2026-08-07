@@ -3,5 +3,6 @@
   imports = [
     ../hosts/aether/aether.nix
     ../hosts/athena/athena.nix
+    ../hosts/hestia/hestia.nix
   ]; 
 }

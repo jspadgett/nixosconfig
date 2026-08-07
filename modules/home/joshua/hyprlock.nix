@@ -16,7 +16,7 @@
         ];
       };
       background = {
-        monitor = "DP-4";
+        monitor = "desc:LG Electronics LG HDR WQHD+ 406NTAB4W648";
         path = "/home/joshua/.config/hypr/wallpapers/lockscreen.jpg";
         blur_passes = 3;
       };

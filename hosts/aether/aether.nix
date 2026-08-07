@@ -39,7 +39,7 @@
        ../../modules/desktop/bluetooth.nix
        ../../modules/desktop/printing.nix
        ../../modules/desktop/audio-pro.nix        
-       ../../modules/desktop/plasma.nix
+      # ../../modules/desktop/plasma.nix
        ../../modules/desktop/hyprland.nix
       # ../../modules/desktop/kwallet.nix
        ../../modules/desktop/desktop-packages.nix

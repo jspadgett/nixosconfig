@@ -3,7 +3,7 @@
 #
 # General packages for all systems
   environment.systemPackages = with pkgs; [
-    jellyfin-desktop
+    jellyfin-media-player
     wget
     unzip
     libreoffice-qt

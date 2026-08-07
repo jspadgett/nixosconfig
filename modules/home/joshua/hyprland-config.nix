@@ -11,8 +11,8 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
       ];
 
       monitor = [
-        "DP-4, 3840x1600@75, 0x0, 1"
-        ", preferred, auto, 1"
+          "desc:LG Electronics LG HDR WQHD+ 406NTAB4W648, 3840x1600@75, 0x0, 1"
+          ", preferred, auto, 1"
       ];
 
       "$terminal" = "kitty";
@@ -91,7 +91,7 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
       };
 
       dwindle = {
-        pseudotile = true;
+        # NOTE: dwindle:pseudotile was removed in 0.55 (it did nothing).
         preserve_split = true;
       };
 
@@ -105,6 +105,10 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
         vrr = 2;
+        # NOTE: misc:vfr moved to debug:vfr in 0.55 (see debug block below).
+      };
+
+      debug = {
         vfr = true;
       };
 
@@ -127,7 +131,8 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
-        "$mainMod, J, togglesplit,"
+        # NOTE: togglesplit dispatcher removed in 0.54 -> call via layoutmsg.
+        "$mainMod, J, layoutmsg, togglesplit"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
@@ -186,48 +191,48 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      # ---------------------------------------------------------------------
+      # Window rules — migrated to the 0.55 syntax.
+      #   props are prefixed with `match:`  (class/title/xwayland/float/...)
+      #   boolean effects take `on`/`off`   (float on, center on, ...)
+      #   matcher renames: floating -> float, pinned -> pin
+      #   effect renames:  suppressevent -> suppress_event,
+      #                    idleinhibit   -> idle_inhibit,
+      #                    noblur        -> no_blur
+      # windowrulev2 has been folded into windowrule; PreSonus rules removed.
+      # ---------------------------------------------------------------------
       windowrule = [
-        "suppressevent maximize, class:.*"
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-      ];
+        # Stop empty XWayland surfaces from stealing focus on spawn.
+        # (old `nofocus` -> `no_initial_focus`; if the bool matchers below
+        #  ever throw, drop to just: "match:class ^$, match:xwayland 1, no_initial_focus on")
+        "match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0, no_initial_focus on"
 
-      windowrulev2 = [
-        "opacity 1.0 1.0,class:^(steam|Steam)$"
-        "opacity 1.0 1.0,class:^(steam_app_.*)$"
-        "opacity 1.0 1.0,class:^(proton)$"
-        "idleinhibit fullscreen, class:.*"
-        "fullscreen, class:^(com.presonus.studioapp7)$"
-        "noborder, class:^(com.presonus.studioapp7)$"
-        "noanim, class:^(com.presonus.studioapp7)$"
-        "immediate, class:^(com.presonus.studioapp7)$"
-        "opaque, class:^(com.presonus.studioapp7)$"
-        "forcergbx, class:^(com.presonus.studioapp7)$"
-        "float, class:^(com.presonus.studioapp7)$, title:^(.*Plugin.*)$"
-        "float, class:^(com.presonus.studioapp7)$, title:^(.*VST.*)$"
-        "float, class:^(com.presonus.studioapp7)$, title:^(.*Preferences.*)$"
-        "float, class:^(com.presonus.studioapp7)$, title:^(.*Browser.*)$"
-        "float, class:^(com.presonus.studioapp7)$, title:^(.*Mixer.*)$"
-        "workspace 2 silent, class:^(.qemu-system-x86_64-wrapped)$"
-        "pseudo, class:^(.qemu-system-x86_64-wrapped)$"
-        "size 1920 1080, class:^(.qemu-system-x86_64-wrapped)$"
-        "center, class:^(.qemu-system-x86_64-wrapped)$"
-        "opacity 1.0 1.0, class:^(.qemu-system-x86_64-wrapped)$"
-        "workspace 2 silent, title:^(.*quickemu.*)$"
-        "pseudo, title:^(.*quickemu.*)$"
-        "size 1920 1080, title:^(.*quickemu.*)$"
-        "center, title:^(.*quickemu.*)$"
-        "workspace 3 silent, class:^(firefox)$"
-        "workspace 3 silent, class:^(vesktop)$"
-        "workspace 3 silent, class:^(signal)$"
-    # Adobe 
-        "workspace 6 silent, class:^(lightroom\\.exe)$"
-         "noblur, class:^(lightroom\\.exe)$"
-        "idleinhibit focus, class:^(lightroom\\.exe)$"
-        "fullscreen, class:(forzahorizon6.exe)"
-        "immediate, class:(forzahorizon6.exe)"
-        "workspace 4 silent, class:(forzahorizon6.exe)"
-        "opaque, class:(forzahorizon6.exe)"
-        "noblur, class:(forzahorizon6.exe)"
+        # Let apps handle their own maximize instead of Hyprland.
+        "match:class .*, suppress_event maximize"
+
+        # Keep Steam / Proton windows fully opaque.
+        "match:class ^(steam|Steam)$, opacity 1.0 1.0"
+        "match:class ^(steam_app_.*)$, opacity 1.0 1.0"
+        "match:class ^(proton)$, opacity 1.0 1.0"
+
+        # Inhibit idle whenever anything is fullscreen.
+        "match:class .*, idle_inhibit fullscreen"
+
+        # QEMU / quickemu VMs -> workspace 2, pseudotiled, centered 1080p.
+        "match:class ^(.qemu-system-x86_64-wrapped)$, workspace 2 silent, pseudo on, size 1920 1080, center on, opacity 1.0 1.0"
+        "match:title ^(.*quickemu.*)$, workspace 2 silent, pseudo on, size 1920 1080, center on"
+
+        # Browser + comms -> workspace 3.
+        "match:class ^(firefox)$, workspace 3 silent"
+        "match:class ^(vesktop)$, workspace 3 silent"
+        "match:class ^(signal)$, workspace 3 silent"
+
+        # Adobe Lightroom -> workspace 6.
+        "match:class ^(lightroom\\.exe)$, workspace 6 silent, no_blur on, idle_inhibit focus"
+
+        # Forza Horizon 6 -> workspace 4, fullscreen, tearing allowed.
+        # (old `opaque` -> `opacity 1.0 override`, which forces an absolute value)
+        "match:class (forzahorizon6.exe), fullscreen on, immediate on, workspace 4 silent, opacity 1.0 override, no_blur on"
       ];
     };
   };
