@@ -11,8 +11,12 @@
       ../../modules/common/base.nix
       ../../modules/common/joshua-sshkeys.nix
       ./configuration.nix
-
-      # ── Network ──
+     
+      # ── Desktop ──
+      ../../modules/desktop/xfce.nix
+      ../../modules/desktop/audio.nix
+     
+       # ── Network ──
       ../../modules/features/networkmanager.nix
       ../../modules/features/ssh.nix
       ../../modules/features/tailscale.nix

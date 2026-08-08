@@ -9,7 +9,7 @@
 
   networking.hostName = "hestia";
   hardware.acpilight.enable = true;  # working backlight control on PBP
-
+  services.displayManager.autoLogin = { enable = true; user = "melissa"; };
   users.users.joshua = {
     isNormalUser = true;
     description = "joshua";
