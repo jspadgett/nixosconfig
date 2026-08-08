@@ -10,6 +10,13 @@
   networking.hostName = "hestia";
   hardware.acpilight.enable = true;  # working backlight control on PBP
   services.displayManager.autoLogin = { enable = true; user = "melissa"; };
+  # Reaches the greeter and the X server, not just the user session
+  environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
+
+  # Put the same var into LightDM's own environment
+  services.xserver.displayManager.lightdm.extraSeatDefaults = ''
+    greeter-setup-script=/bin/sh -c "export LIBGL_ALWAYS_SOFTWARE=1"
+  '';
   users.users.joshua = {
     isNormalUser = true;
     description = "joshua";
