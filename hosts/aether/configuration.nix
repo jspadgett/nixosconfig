@@ -33,7 +33,11 @@ networking.hostName = "aether"; # Define your hostname.
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "joshua";
+
   # List packages installed in system profile. To search, run:
+  modules.desktop.claude-code.enable = true;
+  modules.desktop.openmw.enable = true;
+
   # $ nix search wget
 
   # Some programs need SUID wrappers, can be configured further or are

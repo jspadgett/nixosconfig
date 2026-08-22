@@ -10,8 +10,8 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
         "3, layout:master, layoutopt:orientation:center, layoutopt:mfact:0.50"
       ];
 
-      monitor = [
-          "desc:LG Electronics LG HDR WQHD+ 406NTAB4W648, 3840x1600@75, 0x0, 1"
+    monitor = [
+          "desc:LG Electronics LG HDR WQHD+ 406NTAB4W648, highrr, 0x0, 1"
           ", preferred, auto, 1"
       ];
 

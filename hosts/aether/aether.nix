@@ -36,7 +36,8 @@
        ../../modules/nas/slow2-nfs.nix
        ../../modules/nas/darktable-nfs.nix
        #--Desktop Features
-       ../../modules/desktop/bluetooth.nix
+      ../../modules/desktop/openmw.nix 
+      ../../modules/desktop/bluetooth.nix
        ../../modules/desktop/printing.nix
        ../../modules/desktop/audio-pro.nix        
       # ../../modules/desktop/plasma.nix
@@ -47,6 +48,7 @@
       # ../../modules/desktop/lightroom.nix
        ../../modules/desktop/scheduler.nix
        ../../modules/desktop/sunshine.nix
+       ../../modules/desktop/claude-code.nix
        inputs.agenix.nixosModules.default
        inputs.home-manager.nixosModules.home-manager
        {

@@ -9,7 +9,7 @@
 
   networking.hostName = "hestia";
   hardware.acpilight.enable = true;  # working backlight control on PBP
-  services.displayManager.autoLogin = { enable = true; user = "melissa"; };
+#  services.displayManager.autoLogin = { enable = true; user = "melissa"; };
   # Reaches the greeter and the X server, not just the user session
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
