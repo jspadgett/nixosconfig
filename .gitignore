@@ -6,3 +6,12 @@ result
 # state (disk usage, store size, package versions) that silently rots.
 OPTIMIZATIONS.md
 hosts/*/OPTIMIZATIONS.md
+
+# Claude Code local state: permission allowlists, MCP servers, session data.
+# Machine-local and can carry paths and history, so it stays out of a public
+# repo. Note this deliberately does NOT match modules/desktop/claude-code.nix,
+# which is system configuration and belongs in the repo.
+.claude/
+.claude.json
+.mcp.json
+CLAUDE.local.md
