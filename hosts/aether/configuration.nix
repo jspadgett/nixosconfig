@@ -39,6 +39,8 @@
 
   # jsp.lightroom imported but off — needs a Wine prefix bootstrapped by hand.
   jsp.hyprland.enable = true;    # implies jsp.gvfs
+  jsp.darktable-nfs.enable = true;
+  jsp.slow2-nfs.enable = true;
   # jsp.kdeconnect is imported but left off — see modules/features/kdeconnect.nix.
 
   # Bootloader.
