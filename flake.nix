@@ -13,13 +13,11 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-     
 
     pinebook-pro = {
-      url = "path:/home/joshua/pinebook-pro-nixos";
+      url = "github:jspadgett/pinebook-pro-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     flake-parts.url = "github:hercules-ci/flake-parts";
   

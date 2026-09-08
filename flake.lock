@@ -222,14 +222,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1787518751,
-        "narHash": "sha256-7tBs1yhdW/tZdsottkWY/QzI1TGnEL2JEJ/13xB3cPA=",
-        "path": "/home/joshua/pinebook-pro-nixos",
-        "type": "path"
+        "lastModified": 1788885388,
+        "narHash": "sha256-HrUetWOnqfosK90398s3OWoW145u/+M/7C+fzHUZasw=",
+        "owner": "jspadgett",
+        "repo": "pinebook-pro-nixos",
+        "rev": "2c4ecaafc5788ddfcf00adb2d821fec8fe5b71c6",
+        "type": "github"
       },
       "original": {
-        "path": "/home/joshua/pinebook-pro-nixos",
-        "type": "path"
+        "owner": "jspadgett",
+        "repo": "pinebook-pro-nixos",
+        "type": "github"
       }
     },
     "root": {
