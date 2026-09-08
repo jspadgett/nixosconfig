@@ -10,9 +10,9 @@
       default.clock.max-quantum = 512;
     };
   };
-  boot.extraModprobeConfig = ''
-    options snd_hda_intel power_save=0
-  '';
+  # boot.extraModprobeConfig for snd_hda_intel power_save=0 lives in audio.nix,
+  # which this module imports. It is types.lines, so defining it in both files
+  # concatenated rather than conflicted and emitted the option twice.
   services.udev.extraRules = ''
   ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0499", ATTR{idProduct}=="1704", ATTR{power/control}="on"
 '';

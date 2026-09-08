@@ -22,18 +22,24 @@
     libnotify 
     wofi 
     hyprshot
-    hyprlock 
-    wallust 
+    hyprlock
     hypridle
     kdePackages.kate
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.tumbler
-    xfce.thunar-archive-plugin
+    # tumbler comes from services.tumbler.enable above, which registers the
+    # D-Bus service as well as installing the package — listing the package
+    # here too was redundant, and the package alone would not have worked.
+    thunar
+    thunar-volman
+    thunar-archive-plugin
   ];
 
-  # programs.hyprland already sets xdg.portal.enable and adds the hyprland portal
-  # (synced to your Hyprland package). We only add GTK, for the file picker XDPH lacks.
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # programs.hyprland sets xdg.portal.enable and, via nixpkgs'
+  # wayland-session.nix (enableGtkPortal, default true), already adds BOTH the
+  # version-synced hyprland portal and xdg-desktop-portal-gtk. Adding GTK here
+  # as well was a third registration of the same portal.
+  #
+  # This line is still doing real work: it sets the portal *preference order*
+  # for the Hyprland session, so XDPH is tried first and GTK is the fallback
+  # for the file picker XDPH lacks.
   xdg.portal.config.hyprland.default = [ "hyprland" "gtk" ];
 }

@@ -43,10 +43,10 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
    programs.firefox.enable = true;
 # Enable agenix
    environment.systemPackages = [
-    inputs.agenix.packages.${pkgs.system}.default
+    # pkgs.system is deprecated in favour of pkgs.stdenv.hostPlatform.system
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
  ];
-   environment.pathsToLink = [
-     "/share/applications"
-     "/share/xdg-desktop-portal"
-   ];
+# environment.pathsToLink for /share/applications and /share/xdg-desktop-portal
+# removed: both are already in the NixOS default set, so adding them produced
+# /share/applications three times and /share/xdg-desktop-portal twice.
   }

@@ -40,13 +40,25 @@ networking.hostName = "aether"; # Define your hostname.
   users.users.joshua = {
     isNormalUser = true;
     description = "joshua";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "docker" "video" "render" ];
+    # "plugdev" removed: it is a Debian/Arch convention and no such group
+    # exists on NixOS, which grants device access via logind uaccess instead —
+    # the entry was silently inert.
+    # "libvirtd" added: the group exists and virtualisation.nix enables
+    # libvirtd + virt-manager, but joshua was not a member, so every VM
+    # operation went through a polkit password prompt.
+    extraGroups = [ "networkmanager" "wheel" "dialout" "docker" "video" "render" "libvirtd" ];
 
   };
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "joshua";
+  # The Hyprland package ships both hyprland.desktop and hyprland-uwsm.desktop.
+  # autoLogin skips the greeter, so with no default SDDM falls back to its
+  # last-used state file — nondeterministic on a fresh boot. Declare the UWSM
+  # session explicitly: programs.hyprland.withUWSM is true, and sunshine's user
+  # service depends on the graphical-session.target ordering UWSM sets up.
+  services.displayManager.defaultSession = "hyprland-uwsm";
 
   # List packages installed in system profile. To search, run:
   modules.desktop.claude-code.enable = true;

@@ -26,7 +26,10 @@
       # ../../modules/features/kdeconnect.nix
        ../../modules/features/appimage.nix
        ../../modules/features/flatpak.nix
-       ../../modules/features/gvfs.nix
+       # gvfs.nix not imported: desktop/hyprland.nix already enables it, and
+       # services.gvfs.enable is types.bool (mergeEqualOption), so the two
+       # definitions were legal only while both said true. The module file
+       # stays for athena, which uses it without hyprland.nix.
        ../../modules/features/gpgagent.nix
        ../../modules/features/mtr.nix
        ../../modules/features/joshua-password.nix 
@@ -55,7 +58,13 @@
        {
          home-manager.useGlobalPkgs = true;
          home-manager.useUserPackages = true;
-         home-manager.extraSpecialArgs = { inherit inputs; }; 
+         # Without this, a pre-existing unmanaged dotfile that collides with a
+         # managed one aborts the entire activation — and therefore the whole
+         # nixos-rebuild switch. With it, the file is renamed and activation
+         # continues. Sweep leftovers with:
+         #   find ~ -name '*.hm-bak' -newer /run/current-system
+         home-manager.backupFileExtension = "hm-bak";
+         home-manager.extraSpecialArgs = { inherit inputs; };
          home-manager.users.joshua = import ../../modules/home/joshua/default.nix;
         }
 
