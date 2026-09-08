@@ -215,6 +215,23 @@
         "type": "github"
       }
     },
+    "pinebook-pro": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787518751,
+        "narHash": "sha256-7tBs1yhdW/tZdsottkWY/QzI1TGnEL2JEJ/13xB3cPA=",
+        "path": "/home/joshua/pinebook-pro-nixos",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/joshua/pinebook-pro-nixos",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -223,7 +240,8 @@
         "home-manager": "home-manager_2",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "pinebook-pro": "pinebook-pro"
       }
     },
     "systems": {

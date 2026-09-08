@@ -13,7 +13,14 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    
+     
+
+    pinebook-pro = {
+      url = "path:/home/joshua/pinebook-pro-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     flake-parts.url = "github:hercules-ci/flake-parts";
   
     agenix = {
@@ -21,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  
+
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ ./flake/hosts.nix ];
