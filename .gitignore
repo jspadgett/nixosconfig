@@ -1,1 +1,8 @@
 result
+
+# Local review / working notes — not part of the system definition.
+# These are generated analyses meant to be read, acted on, then deleted;
+# tracking them would mean the repo carries a stale snapshot of machine
+# state (disk usage, store size, package versions) that silently rots.
+OPTIMIZATIONS.md
+hosts/*/OPTIMIZATIONS.md
