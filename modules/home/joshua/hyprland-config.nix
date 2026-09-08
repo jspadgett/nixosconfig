@@ -48,18 +48,22 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
         active_opacity = 1;
         inactive_opacity = 0.9;
         shadow = {
-          enabled = true;
+          enabled = false;
           range = 4;
           render_power = 3;
           color = "rgb(E4F0EC)";
         };
         blur = {
-          enabled = true;
+          enabled = false;
           size = 3;
           passes = 1;
           vibrancy = 0.1696;
-        };
+        };   
       };
+      render = {
+        direct_scanout = true;
+      };
+      
 
       animations = {
         enabled = true;
