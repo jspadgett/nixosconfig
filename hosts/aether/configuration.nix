@@ -11,6 +11,15 @@
       ./hardware-configuration.nix
     ];
 
+  # ── Module toggles ────────────────────────────────────────────────────
+  # Modules under modules/ expose their own jsp.* enable flag. Turning a
+  # feature on happens here, not by adding or removing an import.
+  jsp.tailscale.enable = true;
+  jsp.networkmanager.enable = true;
+  jsp.ssh.enable = true;
+  jsp.mtr.enable = true;
+  jsp.gpgagent.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

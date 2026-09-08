@@ -12,7 +12,15 @@
 
   services.displayManager.autoLogin = { enable = true; user = "melissa"; };
 
+  # ── Module toggles ────────────────────────────────────────────────────
+  # Modules under modules/ expose their own jsp.* enable flag. Turning a
+  # feature on happens here, not by adding or removing an import.
   jsp.pinepacks.enable = true;
+  jsp.tailscale.enable = true;
+  jsp.networkmanager.enable = true;
+  jsp.ssh.enable = true;
+  jsp.mtr.enable = true;
+  jsp.gpgagent.enable = true;
   # Pinebook Pro enablement (audio unmute + hardware video decode)
   pinebook-pro.audio = {
     enable = true;

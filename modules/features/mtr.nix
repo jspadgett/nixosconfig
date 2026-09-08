@@ -1,7 +1,12 @@
 # /modules/features/mtr.nix
-{ ... }: {
+{ config, lib, ... }:
+let
+  cfg = config.jsp.mtr;
+in
+{
+  options.jsp.mtr.enable = lib.mkEnableOption "mtr, combined traceroute and ping";
 
-#
-#Enables TRACEROUTE
-   programs.mtr.enable = true;
-   }
+  config = lib.mkIf cfg.enable {
+    programs.mtr.enable = true;
+  };
+}
