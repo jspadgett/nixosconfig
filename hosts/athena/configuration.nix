@@ -28,6 +28,7 @@
   jsp.bluetooth.enable = true;
   jsp.printing.enable = true;
   jsp.nerdfonts.enable = true;
+  jsp.cosmic.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

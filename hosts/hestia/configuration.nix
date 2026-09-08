@@ -21,6 +21,7 @@
   jsp.ssh.enable = true;
   jsp.mtr.enable = true;
   jsp.gpgagent.enable = true;
+  jsp.xfce.enable = true;
   # Pinebook Pro enablement (audio unmute + hardware video decode)
   pinebook-pro.audio = {
     enable = true;

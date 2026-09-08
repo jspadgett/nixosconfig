@@ -1,6 +1,5 @@
-# modules/features/sunshine.nix
+# modules/desktop/sunshine.nix
 # Sunshine game stream host (Moonlight clients connect to this).
-# Import-is-enable: importing this module activates it.
 #
 # The upstream nixpkgs module already handles: uinput, udev rules,
 # avahi mDNS discovery, and the systemd user service (tied to
@@ -14,9 +13,11 @@
 # Moonlight client's resolution/refresh (SUNSHINE_CLIENT_* env
 # vars) and restores native on stream end. Handles both Plasma
 # (kscreen-doctor) and Hyprland (hyprctl) sessions.
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
+  cfg = config.jsp.sunshine;
+
   # Native mode restored when the stream ends.
   nativeMode = "3840x1600@75";
 
@@ -52,54 +53,59 @@ let
   '';
 in
 {
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
+  options.jsp.sunshine.enable =
+    lib.mkEnableOption "the Sunshine game stream host";
 
-    # CAP_SYS_ADMIN wrapper, required for DRM/KMS capture on Wayland.
-    capSysAdmin = true;
+  config = lib.mkIf cfg.enable {
+    services.sunshine = {
+      enable = true;
+      autoStart = true;
 
-    # TCP 47984/47989/47990/48010, UDP 47998-48000/48002/48010
-    # (derived as offsets from settings.port = 47989).
-    openFirewall = true;
+      # CAP_SYS_ADMIN wrapper, required for DRM/KMS capture on Wayland.
+      capSysAdmin = true;
 
-    settings = {
-      sunshine_name = "aether";
+      # TCP 47984/47989/47990/48010, UDP 47998-48000/48002/48010
+      # (derived as offsets from settings.port = 47989).
+      openFirewall = true;
 
-      # AMD VAAPI encoding on the RX 9070 XT
-      encoder = "vaapi";
-      adapter_name = "/dev/dri/renderD128";
+      settings = {
+        sunshine_name = "aether";
 
-      # KMS capture works on both Hyprland and Plasma Wayland
-      capture = "kms";
+        # AMD VAAPI encoding on the RX 9070 XT
+        encoder = "vaapi";
+        adapter_name = "/dev/dri/renderD128";
 
-      # Runs for every app: match client resolution on start,
-      # restore native mode when the stream ends.
-      global_prep_cmd = builtins.toJSON [
-        {
-          do = "${setMode}";
-          undo = "${restoreMode}";
-          elevated = "false";
-        }
-      ];
-    };
+        # KMS capture works on both Hyprland and Plasma Wayland
+        capture = "kms";
 
-    applications = {
-      env = {
-        PATH = "$(PATH):$(HOME)/.local/bin";
+        # Runs for every app: match client resolution on start,
+        # restore native mode when the stream ends.
+        global_prep_cmd = builtins.toJSON [
+          {
+            do = "${setMode}";
+            undo = "${restoreMode}";
+            elevated = "false";
+          }
+        ];
       };
-      apps = [
-        {
-          name = "Desktop";
-          image-path = "desktop.png";
-        }
-        {
-          name = "Steam Big Picture";
-          detached = [ "${pkgs.steam}/bin/steam steam://open/bigpicture" ];
-          image-path = "steam.png";
-          auto-detach = "true";
-        }
-      ];
+
+      applications = {
+        env = {
+          PATH = "$(PATH):$(HOME)/.local/bin";
+        };
+        apps = [
+          {
+            name = "Desktop";
+            image-path = "desktop.png";
+          }
+          {
+            name = "Steam Big Picture";
+            detached = [ "${pkgs.steam}/bin/steam steam://open/bigpicture" ];
+            image-path = "steam.png";
+            auto-detach = "true";
+          }
+        ];
+      };
     };
   };
 }

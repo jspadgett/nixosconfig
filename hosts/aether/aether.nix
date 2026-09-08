@@ -51,7 +51,8 @@
       # ../../modules/desktop/kwallet.nix
        ../../modules/desktop/desktop-packages.nix
        ../../modules/desktop/nerdfonts.nix
-      # ../../modules/desktop/lightroom.nix
+       # Imported but gated off via jsp.lightroom.enable.
+       ../../modules/desktop/lightroom.nix
        ../../modules/desktop/scheduler.nix
        ../../modules/desktop/sunshine.nix
        ../../modules/desktop/claude-code.nix

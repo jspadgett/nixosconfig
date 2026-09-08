@@ -33,6 +33,9 @@
   jsp.desktop-packages.enable = true;
   jsp.claude-code.enable = true;
   jsp.openmw.enable = true;
+  jsp.scheduler.enable = true;
+  jsp.sunshine.enable = true;
+  # jsp.lightroom imported but off — needs a Wine prefix bootstrapped by hand.
   # jsp.gvfs stays off: desktop/hyprland.nix already enables services.gvfs.
   # jsp.kdeconnect is imported but left off — see modules/features/kdeconnect.nix.
 

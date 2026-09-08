@@ -1,20 +1,29 @@
 # modules/desktop/xfce.nix
-{ pkgs, ... }: {
-  services.xserver.enable = true;
-  services.xserver.xkb.layout = "us";
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
-  services.displayManager.defaultSession = "xfce";
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.jsp.xfce;
+in
+{
+  options.jsp.xfce.enable =
+    lib.mkEnableOption "the Xfce desktop on X11, with LightDM and Thunar";
 
-  services.gvfs.enable = true;
-  services.tumbler.enable = true;
-  programs.thunar = {
-    enable = true;
-    plugins = [ pkgs.thunar-archive-plugin pkgs.thunar-volman ];
+  config = lib.mkIf cfg.enable {
+    services.xserver.enable = true;
+    services.xserver.xkb.layout = "us";
+    services.xserver.displayManager.lightdm.enable = true;
+    services.xserver.desktopManager.xfce.enable = true;
+    services.displayManager.defaultSession = "xfce";
+
+    services.gvfs.enable = true;
+    services.tumbler.enable = true;
+    programs.thunar = {
+      enable = true;
+      plugins = [ pkgs.thunar-archive-plugin pkgs.thunar-volman ];
+    };
+
+    environment.systemPackages = with pkgs; [
+      xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin
+      pavucontrol networkmanagerapplet file-roller mousepad
+    ];
   };
-
-  environment.systemPackages = with pkgs; [
-    xfce4-whiskermenu-plugin xfce4-pulseaudio-plugin
-    pavucontrol networkmanagerapplet file-roller mousepad
-  ];
 }
