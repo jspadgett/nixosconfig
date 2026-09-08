@@ -8,6 +8,7 @@
        #--- Core modules
        ../../modules/common/base.nix
        ../../modules/common/joshua-sshkeys.nix
+       ../../modules/common/unstable.nix
        ./configuration.nix
         
        #--- Networking 
@@ -58,16 +59,16 @@
          home-manager.users.joshua = import ../../modules/home/joshua/default.nix;
         }
 
-       # Wine from unstable — stable 25.11 ships 10.20, Lightroom needs >= 11.8
-       {
-         nixpkgs.overlays = [
-           (final: prev: {
-             wineWowPackages = prev.wineWowPackages // {
-               staging = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.wineWowPackages.staging;
-             };
-           })
-         ];
-       }
+       # A Wine overlay used to live here, pulling wineWowPackages.staging from
+       # nixpkgs-unstable.legacyPackages — a third nixpkgs instantiation on top
+       # of the two `import`s in amdgpu.nix and openmw.nix.
+       #
+       # The version gap it exists for is real: stable 26.05 ships staging 11.8,
+       # unstable ships 11.16. So this is not removed but relocated — see
+       # modules/home/joshua/default.nix, which now takes it from the shared
+       # pkgs.unstable overlay (modules/common/unstable.nix). Same 11.16, one
+       # instantiation instead of three, and the version choice now sits at the
+       # point of use rather than in a host-level overlay.
      ];
    };
   }

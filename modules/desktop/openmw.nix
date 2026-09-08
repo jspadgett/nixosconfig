@@ -1,13 +1,9 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.modules.desktop.openmw;
-  unstable = import inputs.nixpkgs-unstable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-   };
 in
 {
   options.modules.desktop.openmw = {
@@ -22,7 +18,10 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-     unstable. openmw
+      # Genuinely ahead of stable (0.51.0 vs 0.50.0), so this one stays on
+      # unstable — but via the shared pkgs.unstable overlay from
+      # modules/common/unstable.nix, not a private `import` of nixpkgs.
+      pkgs.unstable.openmw
 
       # MOMW Tools Pack (momw-configurator, tes3cmd, delta_plugin, etc.) ships
       # as generic FHS-expecting Linux binaries. steam-run wraps them in an

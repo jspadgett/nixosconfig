@@ -1,11 +1,5 @@
 # /modules/features/amdgpu.nix
-{ pkgs, inputs, ... }:
-let
-  unstable = import inputs.nixpkgs-unstable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-in
+{ pkgs, ... }:
 {
   # AMD GPU — 9070 XT (RDNA4 / gfx1201)
 
@@ -13,12 +7,17 @@ in
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    # Track unstable Mesa for latest RADV on RDNA4.
-    # Both 64-bit and 32-bit must match to avoid Proton mismatches.
-    package = unstable.mesa;
-    package32 = unstable.pkgsi686Linux.mesa;
-    # OpenCL via ROCm
-    extraPackages = [ unstable.rocmPackages.clr.icd ];
+    # Mesa comes from stable. This previously overrode package/package32 with
+    # unstable Mesa to "track latest RADV on RDNA4" — but RDNA4/gfx1201 landed
+    # in Mesa 25.0 and stable now ships 26.1.8, so the override bought one
+    # point release (26.2.1) at the cost of a complete second Mesa stack,
+    # 64-bit and 32-bit. If it is ever reinstated, override BOTH or NEITHER:
+    # a mismatched pair is the Proton breakage the old comment warned about.
+    #
+    # OpenCL via ROCm. Taken from pkgs, not unstable — both channels ship
+    # 7.2.3, and sourcing the ICD from a different instantiation than the
+    # rocmPackages.clr below pulled in a second full multi-GB ROCm closure.
+    extraPackages = [ pkgs.rocmPackages.clr.icd ];
   };
 
   # Unlock full sysfs power management + overdrive bit.
