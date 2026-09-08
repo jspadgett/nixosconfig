@@ -1,27 +1,23 @@
 # /modules/features/signal.nix
 #
-# Signal Desktop wrapped to force kwallet6 as its password store.
-# NOTE: desktop/kwallet.nix is currently commented out on every host, so the
-# wallet this points at is not actually enabled. Left as-is to keep the
-# closure unchanged; worth revisiting.
+# This used to wrap signal-desktop with --password-store=kwallet6, from when
+# aether ran Plasma. Nothing has provided a wallet since the move to Hyprland:
+# no kwalletd, and security.pam.services.sddm.enableKwallet is false. Electron
+# therefore fell back to no backend and Signal wrote its database key in
+# plaintext to ~/.config/Signal/config.json ("key" rather than "encryptedKey").
+#
+# The flag was doing nothing, so it is gone rather than left implying a
+# protection that was not there. Encrypting the key for real needs a keyring
+# PAM can unlock, which autoLogin prevents — no password is entered at login,
+# so any backend would prompt on first use. That is a separate decision.
 { config, lib, pkgs, ... }:
 let
   cfg = config.jsp.signal;
-
-  signal-with-kwallet = pkgs.symlinkJoin {
-    name = "signal-desktop";
-    paths = [ pkgs.signal-desktop ];
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/signal-desktop \
-        --add-flags "--password-store=kwallet6"
-    '';
-  };
 in
 {
-  options.jsp.signal.enable = lib.mkEnableOption "Signal Desktop, wrapped to use kwallet6";
+  options.jsp.signal.enable = lib.mkEnableOption "Signal Desktop";
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ signal-with-kwallet ];
+    environment.systemPackages = [ pkgs.signal-desktop ];
   };
 }
