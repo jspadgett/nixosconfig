@@ -8,6 +8,10 @@
         # ── Core ────────────────────────────────────────────────
         ../../modules/common/base.nix
         ../../modules/common/joshua-sshkeys.nix
+        # Required by modules/home/joshua/default.nix, which takes Wine from
+        # pkgs.unstable. Without it that reference is an undefined variable and
+        # the whole host fails to evaluate.
+        ../../modules/common/unstable.nix
         ./configuration.nix
 
         # ── Network ─────────────────────────────────────────────
