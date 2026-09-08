@@ -14,7 +14,10 @@ in
     services.xserver.desktopManager.xfce.enable = true;
     services.displayManager.defaultSession = "xfce";
 
-    services.gvfs.enable = true;
+    # Routed through the shared toggle, matching desktop/hyprland.nix, so
+    # features/gvfs.nix is the single owner of services.gvfs.
+    jsp.gvfs.enable = true;
+
     services.tumbler.enable = true;
     programs.thunar = {
       enable = true;

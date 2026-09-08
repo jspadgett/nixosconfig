@@ -7,26 +7,20 @@
       # ── Hardware (RK3399 quirks: DTB, kernel, touchpad/kbd, efifb=off) ──
       inputs.nixos-hardware.nixosModules.pine64-pinebook-pro
       inputs.pinebook-pro.nixosModules.default
-      # ── Core ──
-      ../../modules/common/base.nix
-      ../../modules/common/joshua-sshkeys.nix
+
+      # Every NixOS module under modules/, inert until switched on by a
+      # jsp.<name>.enable flag in ./configuration.nix.
+      ../../modules
       ./configuration.nix
 
-      # ── Desktop ──
-      ../../modules/desktop/xfce.nix
-      ../../modules/desktop/audio.nix
-
-      # ── Network ──
-      ../../modules/features/networkmanager.nix
-      ../../modules/features/ssh.nix
-      ../../modules/features/tailscale.nix
-      # ── Features ──
-      ../../modules/features/mtr.nix
-      ../../modules/features/gpgagent.nix
-      ../../modules/features/joshua-password.nix
-      ../../modules/features/melissa-password.nix
-      ../../modules/features/pinepacks.nix
       inputs.agenix.nixosModules.default
+
+      # No home-manager users on this host, but desktop/claude-code.nix defines
+      # home-manager.users.joshua.*. mkIf false suppresses the value, not the
+      # option path, so the module system still requires the option to exist.
+      # Importing every module everywhere means every host needs the frameworks
+      # any module references.
+      inputs.home-manager.nixosModules.home-manager
     ];
   };
 }
