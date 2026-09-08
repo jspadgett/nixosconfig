@@ -45,10 +45,14 @@
       ../../modules/desktop/openmw.nix 
       ../../modules/desktop/bluetooth.nix
        ../../modules/desktop/printing.nix
-       ../../modules/desktop/audio-pro.nix        
-      # ../../modules/desktop/plasma.nix
+       # audio-pro no longer imports audio.nix; it sets jsp.audio.enable
+       # instead, so audio.nix is imported here like every other module.
+       ../../modules/desktop/audio.nix
+       ../../modules/desktop/audio-pro.nix
+       # Imported but gated off via their jsp.* flags.
+       ../../modules/desktop/plasma.nix
+       ../../modules/desktop/kwallet.nix
        ../../modules/desktop/hyprland.nix
-      # ../../modules/desktop/kwallet.nix
        ../../modules/desktop/desktop-packages.nix
        ../../modules/desktop/nerdfonts.nix
        # Imported but gated off via jsp.lightroom.enable.

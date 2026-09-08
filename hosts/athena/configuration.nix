@@ -29,6 +29,7 @@
   jsp.printing.enable = true;
   jsp.nerdfonts.enable = true;
   jsp.cosmic.enable = true;
+  jsp.audio.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
