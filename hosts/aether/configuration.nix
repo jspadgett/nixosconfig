@@ -38,7 +38,7 @@
   jsp.audio-pro.enable = true;   # implies jsp.audio
 
   # jsp.lightroom imported but off — needs a Wine prefix bootstrapped by hand.
-  # jsp.gvfs stays off: desktop/hyprland.nix already enables services.gvfs.
+  jsp.hyprland.enable = true;    # implies jsp.gvfs
   # jsp.kdeconnect is imported but left off — see modules/features/kdeconnect.nix.
 
   # Bootloader.

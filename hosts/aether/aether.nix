@@ -28,10 +28,10 @@
        ../../modules/features/kdeconnect.nix
        ../../modules/features/appimage.nix
        ../../modules/features/flatpak.nix
-       # gvfs.nix not imported: desktop/hyprland.nix already enables it, and
-       # services.gvfs.enable is types.bool (mergeEqualOption), so the two
-       # definitions were legal only while both said true. The module file
-       # stays for athena, which uses it without hyprland.nix.
+       # gvfs.nix is imported now: desktop/hyprland.nix sets jsp.gvfs.enable
+       # rather than services.gvfs directly, so features/gvfs.nix is the one
+       # owner of that option on every host.
+       ../../modules/features/gvfs.nix
        ../../modules/features/gpgagent.nix
        ../../modules/features/mtr.nix
        ../../modules/features/joshua-password.nix 
