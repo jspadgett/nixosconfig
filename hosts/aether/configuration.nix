@@ -19,6 +19,7 @@
   jsp.ssh.enable = true;
   jsp.mtr.enable = true;
   jsp.gpgagent.enable = true;
+  jsp.joshua-password.enable = true;
   jsp.mullvad.enable = true;
   jsp.appimage.enable = true;
   jsp.flatpak.enable = true;

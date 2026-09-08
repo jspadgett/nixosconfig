@@ -21,6 +21,10 @@
   jsp.ssh.enable = true;
   jsp.mtr.enable = true;
   jsp.gpgagent.enable = true;
+  # mutableUsers = false on this host: both of these are mandatory, and
+  # common/base.nix asserts as much.
+  jsp.joshua-password.enable = true;
+  jsp.melissa-password.enable = true;
   jsp.xfce.enable = true;
   jsp.audio.enable = true;
   # Pinebook Pro enablement (audio unmute + hardware video decode)

@@ -1,6 +1,36 @@
 #/modules/common/base.nix
-{ pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
+let
+  # Normal users with no declarative password source of any kind.
+  passwordless = lib.filter
+    (u: u.hashedPassword == null
+     && u.hashedPasswordFile == null
+     && u.password == null
+     && u.initialPassword == null
+     && u.initialHashedPassword == null)
+    (lib.filter (u: u.isNormalUser) (lib.attrValues config.users.users));
+in
 {
+  # Guard against a password module being imported but left disabled.
+  #
+  # nixpkgs has its own check, but it only requires that ONE privileged
+  # account has a password OR an SSH key — so on a host where joshua is in
+  # wheel with authorized keys, it passes even if every other user has no
+  # password at all. With mutableUsers = false, /etc/shadow is regenerated
+  # from config on each activation, so that means a silent lockout for
+  # everyone else. This makes it a build error instead.
+  assertions = [
+    {
+      assertion = config.users.mutableUsers || passwordless == [ ];
+      message = ''
+        users.mutableUsers is false, but these normal users have no password
+        source and would be locked out: ${lib.concatMapStringsSep ", " (u: u.name) passwordless}.
+        Set hashedPasswordFile (see modules/features/*-password.nix and its
+        jsp.*.enable flag), or set users.mutableUsers = true.
+      '';
+    }
+  ];
+
 #boot latest kernel
 boot.kernelPackages = pkgs.linuxPackages_latest;
 #Enable Flakes

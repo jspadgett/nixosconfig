@@ -19,6 +19,8 @@
   jsp.ssh.enable = true;
   jsp.mtr.enable = true;
   jsp.gpgagent.enable = true;
+  jsp.joshua-password.enable = true;
+  jsp.anna-password.enable = true;
   jsp.flatpak.enable = true;
   jsp.gvfs.enable = true;
   jsp.signal.enable = true;
