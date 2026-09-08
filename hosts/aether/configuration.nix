@@ -23,7 +23,12 @@
   jsp.appimage.enable = true;
   jsp.flatpak.enable = true;
   jsp.signal.enable = true;
+  jsp.amdgpu.enable = true;
+  jsp.virtualisation.enable = true;
+  jsp.steam.enable = true;
+  jsp.joshua-ssh-private-key.enable = true;
   # jsp.gvfs stays off: desktop/hyprland.nix already enables services.gvfs.
+  # jsp.kdeconnect is imported but left off — see modules/features/kdeconnect.nix.
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

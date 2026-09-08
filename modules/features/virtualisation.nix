@@ -1,12 +1,19 @@
 # /modules/features/virtualisation.nix
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.jsp.virtualisation;
+in
 {
-  # Basic virtualization
-  virtualisation.docker = {
-    enable = true;
-    package = pkgs.docker_29;
-  };
+  options.jsp.virtualisation.enable =
+    lib.mkEnableOption "Docker, libvirtd and virt-manager";
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
+  config = lib.mkIf cfg.enable {
+    virtualisation.docker = {
+      enable = true;
+      package = pkgs.docker_29;
+    };
+
+    virtualisation.libvirtd.enable = true;
+    programs.virt-manager.enable = true;
+  };
 }

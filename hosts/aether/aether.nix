@@ -23,7 +23,9 @@
        #-- features        
        ../../modules/features/joshua-ssh-private-key.nix
        ../../modules/features/signal.nix
-      # ../../modules/features/kdeconnect.nix
+       # Imported but gated off via jsp.kdeconnect.enable, so it is actually
+       # evaluated rather than silently rotting behind a commented import.
+       ../../modules/features/kdeconnect.nix
        ../../modules/features/appimage.nix
        ../../modules/features/flatpak.nix
        # gvfs.nix not imported: desktop/hyprland.nix already enables it, and
