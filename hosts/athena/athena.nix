@@ -8,10 +8,6 @@
         # ── Core ────────────────────────────────────────────────
         ../../modules/common/base.nix
         ../../modules/common/joshua-sshkeys.nix
-        # Required by modules/home/joshua/default.nix, which takes Wine from
-        # pkgs.unstable. Without it that reference is an undefined variable and
-        # the whole host fails to evaluate.
-        ../../modules/common/unstable.nix
         ./configuration.nix
 
         # ── Network ─────────────────────────────────────────────
@@ -49,7 +45,10 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.joshua = import ../../modules/home/joshua/default.nix;
+          # joshua's home config is a Hyprland workstation setup (waybar,
+          # hyprpaper, hyprlock, wine, bottles). athena runs COSMIC and he only
+          # ever logs in over SSH, so it does not belong here. He still has an
+          # account via configuration.nix, joshua-sshkeys and joshua-password.
           home-manager.users.anna = import ../../modules/home/anna/default.nix;
         }
 
