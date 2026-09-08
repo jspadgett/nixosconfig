@@ -1,12 +1,19 @@
 # modules/desktop/printing.nix
-{ pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.jsp.printing;
+in
+{
+  options.jsp.printing.enable =
+    lib.mkEnableOption "CUPS printing, with Avahi for network printer discovery";
 
- # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-   };
-   environment.systemPackages = [ pkgs.system-config-printer ];
-  }
+  config = lib.mkIf cfg.enable {
+    services.printing.enable = true;
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+    environment.systemPackages = [ pkgs.system-config-printer ];
+  };
+}

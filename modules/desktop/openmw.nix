@@ -1,22 +1,22 @@
+# modules/desktop/openmw.nix
 { config, lib, pkgs, ... }:
-
-with lib;
-
 let
-  cfg = config.modules.desktop.openmw;
+  cfg = config.jsp.openmw;
 in
 {
-  options.modules.desktop.openmw = {
-    enable = mkEnableOption "OpenMW (Morrowind engine replacement)";
+  # Renamed from modules.desktop.openmw to jsp.* so the whole repo uses one
+  # namespace.
+  options.jsp.openmw = {
+    enable = lib.mkEnableOption "OpenMW (Morrowind engine replacement)";
 
-    modsDir = mkOption {
-      type = types.str;
+    modsDir = lib.mkOption {
+      type = lib.types.str;
       default = "/home/joshua/Games/openmw-mods";
       description = "Directory where extracted mod archives live (each mod in its own subfolder).";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # Genuinely ahead of stable (0.51.0 vs 0.50.0), so this one stays on
       # unstable — but via the shared pkgs.unstable overlay from

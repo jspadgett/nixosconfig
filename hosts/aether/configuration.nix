@@ -27,6 +27,12 @@
   jsp.virtualisation.enable = true;
   jsp.steam.enable = true;
   jsp.joshua-ssh-private-key.enable = true;
+  jsp.bluetooth.enable = true;
+  jsp.printing.enable = true;
+  jsp.nerdfonts.enable = true;
+  jsp.desktop-packages.enable = true;
+  jsp.claude-code.enable = true;
+  jsp.openmw.enable = true;
   # jsp.gvfs stays off: desktop/hyprland.nix already enables services.gvfs.
   # jsp.kdeconnect is imported but left off — see modules/features/kdeconnect.nix.
 
@@ -79,9 +85,6 @@ networking.hostName = "aether"; # Define your hostname.
   # service depends on the graphical-session.target ordering UWSM sets up.
   services.displayManager.defaultSession = "hyprland-uwsm";
 
-  # List packages installed in system profile. To search, run:
-  modules.desktop.claude-code.enable = true;
-  modules.desktop.openmw.enable = true;
 
   # $ nix search wget
 

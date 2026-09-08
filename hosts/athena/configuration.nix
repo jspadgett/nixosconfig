@@ -25,6 +25,9 @@
   jsp.intel7-gpu.enable = true;
   jsp.tlp.enable = true;
   jsp.joshua-ssh-private-key.enable = true;
+  jsp.bluetooth.enable = true;
+  jsp.printing.enable = true;
+  jsp.nerdfonts.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
