@@ -14,7 +14,21 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];  
+  # /boot is a 511M ESP and each generation costs ~35M (kernel + initrd).
+  # Unbounded, it fills at ~14 generations and breaks nixos-rebuild switch.
+  # nix.gc does NOT prune the ESP — only this does, at switch time.
+  boot.loader.systemd-boot.configurationLimit = 8;
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # No swapDevices and no zram means the kernel's only response to memory
+  # pressure is the OOM killer. zram gives it a graceful middle option without
+  # consuming any of the already-scarce disk, which matters for Blender,
+  # Proton shader compilation, libvirtd guests and emulated aarch64 builds.
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 25;
+  };
 
 networking.hostName = "aether"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
