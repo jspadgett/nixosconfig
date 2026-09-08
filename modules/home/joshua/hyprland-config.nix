@@ -5,6 +5,11 @@ lib.mkIf (osConfig.programs.hyprland.enable or false) {
   wayland.windowManager.hyprland = {
     enable = true;
 
+    # home-manager changed this default from "hyprlang" to "lua". Pinned
+    # explicitly so a future update doesn't silently change how the settings
+    # below are rendered; the generated hyprland.conf is what this host runs.
+    configType = "hyprlang";
+
     settings = {
       workspace = [
         "3, layout:master, layoutopt:orientation:center, layoutopt:mfact:0.50"

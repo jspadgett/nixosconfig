@@ -1,8 +1,10 @@
 # modules/desktop/lightroom.nix
 { config, lib, pkgs, ... }:
 let
-  # Resolves to 11.8 staging via the overlay in aether.nix
-  wine = pkgs.wineWowPackages.staging;
+  # Stable staging, 11.8. wineWow64Packages is the single 64-bit build using
+  # Wine's new WoW64 mode; wineWowPackages (the old paired 32/64 build) is
+  # deprecated upstream. Lightroom is 64-bit, so the new mode is fine.
+  wine = pkgs.wineWow64Packages.staging;
 
   # The recipe's prefix. Override at runtime with LR_PREFIX=... if you move it.
   defaultPrefix = "$HOME/src/lightroom-cc-on-linux/wineprefix";

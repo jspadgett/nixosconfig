@@ -31,7 +31,7 @@
     # nixpkgs-unstable.legacyPackages directly — a third nixpkgs instantiation.
     # Sourcing it from the shared pkgs.unstable overlay keeps 11.16 while
     # sharing the whole dependency base with pkgs.unstable.openmw.
-    unstable.wineWowPackages.staging
+    unstable.wineWow64Packages.staging
     #media
     handbrake
     mediawriter
