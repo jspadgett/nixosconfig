@@ -1,9 +1,14 @@
 # /modules/features/mullvad.nix
-{ pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.jsp.mullvad;
+in
+{
+  options.jsp.mullvad.enable = lib.mkEnableOption "Mullvad VPN";
 
-#
-#Enables Mullvad VPN 
-   services.mullvad-vpn.enable = true;
-   services.mullvad-vpn.package = pkgs.mullvad-vpn;
-   environment.systemPackages = [ pkgs.mullvad-vpn ];  
- }
+  config = lib.mkIf cfg.enable {
+    services.mullvad-vpn.enable = true;
+    services.mullvad-vpn.package = pkgs.mullvad-vpn;
+    environment.systemPackages = [ pkgs.mullvad-vpn ];
+  };
+}

@@ -1,9 +1,15 @@
-#/modiles/features/gvfs.nix
-{ ... }: {
+# /modules/features/gvfs.nix
+{ config, lib, ... }:
+let
+  cfg = config.jsp.gvfs;
+in
+{
+  # GVFS provides virtual filesystem support: trash, remote mounts, and MTP
+  # for Android devices over USB. Hosts running desktop/hyprland.nix already
+  # get gvfs from there and should leave this off.
+  options.jsp.gvfs.enable = lib.mkEnableOption "GVFS, including MTP support for Android devices";
 
-#enable mtp support for android devices 
-  # GVFS (GNOME Virtual File System) provides virtual filesystem support.
-  # Enables MTP protocol support for mounting Android devices and other
-  # portable media over USB. Without this, file managers like Dolphin
- services.gvfs.enable = true; 
+  config = lib.mkIf cfg.enable {
+    services.gvfs.enable = true;
+  };
 }

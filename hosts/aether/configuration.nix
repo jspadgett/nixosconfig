@@ -19,6 +19,11 @@
   jsp.ssh.enable = true;
   jsp.mtr.enable = true;
   jsp.gpgagent.enable = true;
+  jsp.mullvad.enable = true;
+  jsp.appimage.enable = true;
+  jsp.flatpak.enable = true;
+  jsp.signal.enable = true;
+  # jsp.gvfs stays off: desktop/hyprland.nix already enables services.gvfs.
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

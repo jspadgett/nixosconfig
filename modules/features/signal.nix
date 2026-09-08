@@ -1,10 +1,13 @@
-# /etc/nixos/signal.nix
+# /modules/features/signal.nix
 #
-# This module handles the custom Signal Desktop wrapper
-# that forces kwallet6 as the password store.
-{ config, pkgs, ... }:
-
+# Signal Desktop wrapped to force kwallet6 as its password store.
+# NOTE: desktop/kwallet.nix is currently commented out on every host, so the
+# wallet this points at is not actually enabled. Left as-is to keep the
+# closure unchanged; worth revisiting.
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.jsp.signal;
+
   signal-with-kwallet = pkgs.symlinkJoin {
     name = "signal-desktop";
     paths = [ pkgs.signal-desktop ];
@@ -15,10 +18,10 @@ let
     '';
   };
 in
-
 {
-  # The module system will MERGE this list with the one from
-  # configuration.nix automatically. You don't need to worry
-  # about conflicts — NixOS concatenates list-type options.
-  environment.systemPackages = [ signal-with-kwallet ];
+  options.jsp.signal.enable = lib.mkEnableOption "Signal Desktop, wrapped to use kwallet6";
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = [ signal-with-kwallet ];
+  };
 }
